@@ -5,7 +5,7 @@ import nitrapi
 
 class CustomerTests: QuickSpec {
     override func spec() {
-        let accessToken = "NjE4ZTY2OWJjOWQzZDIxMGFkNWJjZDUxNDEzMWY2MmM4NDhjMTk4NDc0ZDYyYmI3MmJjNGJjNWFkYjFiNDYwMA"
+        let accessToken = "<access token>"
         let nitrapi = Nitrapi(accessToken: accessToken)
         
         describe("customer") {

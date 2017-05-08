@@ -4,12 +4,6 @@
 [![License](https://img.shields.io/cocoapods/l/nitrapi.svg?style=flat)](http://cocoapods.org/pods/nitrapi)
 [![Platform](https://img.shields.io/cocoapods/p/nitrapi.svg?style=flat)](http://cocoapods.org/pods/nitrapi)
 
-## Usage
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-
 ## Installation
 
 nitrapi is available through [CocoaPods](http://cocoapods.org). To install
@@ -19,9 +13,16 @@ it, simply add the following line to your Podfile:
 pod "nitrapi"
 ```
 
-## Author
-
-Stefan Hanßen, stefan.hanssen@marbis.net
+## Example
+``` swift
+    let nitrapi = Nitrapi(accessToken: "<access token>")
+    do {
+         let services = nitrapi.getServices()
+        // ...
+    } catch {
+        // An error occured
+    }
+´´´
 
 ## License
 

@@ -134,6 +134,8 @@ open class CloudServer: Service {
         open fileprivate(set) var id: Int!
         /// Returns name.
         open fileprivate(set) var name: String!
+        /// Returns windows.
+        open fileprivate(set) var windows: Bool!
         /// Returns daemon.
         open fileprivate(set) var daemon: Bool!
         
@@ -146,11 +148,11 @@ open class CloudServer: Service {
         public func mapping(map: Map) {
             id <- map["id"]
             name <- map["name"]
+            windows <- map["is_windows"]
             daemon <- map["daemon"]
         }
         
-    }
-    
+    }    
     
     /// Returns a list of all backups.
     /// - returns: a list of all backups.
@@ -196,16 +198,7 @@ open class CloudServer: Service {
             "hostname": String(hostname)
             ])
     }
-    
-    /// Returns the full list of available images.
-    /// - returns:
-    open func getImages() throws -> [Image]? {
-        let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers/images", parameters: [:])
         
-        let images = Mapper<Image>().mapArray(JSONArray: data?["images"] as! [[String : Any]])
-        return images
-    }
-    
     /// - parameter imageId:
     open func doReinstall(_ imageId: Int) throws {
         try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reinstall", parameters: [

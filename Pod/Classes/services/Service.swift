@@ -115,22 +115,3 @@ open class Service: Mappable {
         self.autoExtension = autoExtension
     }
 }
-
-/*
- import ObjectMapper
- 
- public class AccountOverview: Mappable {
- // MARK: - Initialization
- public required init?(_ map: Map) {
- }
- 
- public func mapping(map: Map) {
- 
- }
- }
- 
- 
- let data = try client.dataGet("order/payment/countries", parameters: [:])
- return Mapper<Country>().mapArray(data?["countries"])
- 
- */

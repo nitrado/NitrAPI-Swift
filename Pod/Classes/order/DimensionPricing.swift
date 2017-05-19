@@ -38,7 +38,7 @@ open class DimensionPricing: Pricing {
         dims.append("\(rentalTime)")
         
         if !(prices?.keys.contains(calcPath(dims)))! {
-            throw NitrapiError.nitrapiException(message: "Can't find price with dimensions \(calcPath(dims))")
+            throw NitrapiError.nitrapiException(message: "Can't find price with dimensions \(calcPath(dims))", errorId: nil)
         }
         
         let price = prices![calcPath(dims)]
@@ -51,7 +51,7 @@ open class DimensionPricing: Pricing {
             cost -= advice
             return cost
         }
-        throw NitrapiError.nitrapiException(message: "Misformated json for dimension \(calcPath(dims))")
+        throw NitrapiError.nitrapiException(message: "Misformated json for dimension \(calcPath(dims))", errorId: nil)
     }
     
     open override func orderService(_ rentalTime: Int) throws {

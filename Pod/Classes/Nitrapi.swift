@@ -113,6 +113,16 @@ open class Nitrapi {
         return Mapper<GlobalGameList>().map(JSON: data?["games"] as! [String : Any])
     }
     
+    /// Returns the full list of available images.
+    /// - returns:
+    open func getImages() throws -> [CloudServer.Image]? {
+        let data = try client.dataGet("information/cloud_servers/images", parameters: [:])
+        
+        let images = Mapper<CloudServer.Image>().mapArray(JSONArray: data?["images"] as! [[String : Any]])
+        return images
+    }
+
+    
     // MARK: - Rate Limits
     
     /// Returns the current limit of requests per hour for each user.

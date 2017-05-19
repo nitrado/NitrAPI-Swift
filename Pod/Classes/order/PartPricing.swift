@@ -21,14 +21,14 @@ open class PartPricing: Pricing {
         var totalPrice: Int = 0
         for part in prices.parts! {
             if !parts.keys.contains(part.type) {
-                throw NitrapiError.nitrapiException(message: "No amount selected for \(part.type as String)")
+                throw NitrapiError.nitrapiException(message: "No amount selected for \(part.type as String)", errorId: nil)
             }
             let amount = parts[part.type]!
             if amount < part.minCount {
-                throw NitrapiError.nitrapiException(message: "The amount \(amount as Int) of type \(part.type as String) is too small.")
+                throw NitrapiError.nitrapiException(message: "The amount \(amount as Int) of type \(part.type as String) is too small.", errorId: nil)
             }
             if amount > part.maxCount {
-                throw NitrapiError.nitrapiException(message: "The amount \(amount as Int) of type \(part.type as String) is too big.")
+                throw NitrapiError.nitrapiException(message: "The amount \(amount as Int) of type \(part.type as String) is too big.", errorId: nil)
             }
             
             var localPrice = -1
@@ -49,7 +49,7 @@ open class PartPricing: Pricing {
             }
             
             if localPrice == -1 {
-                throw NitrapiError.nitrapiException(message: "No valid price found for part \(part.type as String)")
+                throw NitrapiError.nitrapiException(message: "No valid price found for part \(part.type as String)", errorId: nil)
             }
             totalPrice += localPrice
         }

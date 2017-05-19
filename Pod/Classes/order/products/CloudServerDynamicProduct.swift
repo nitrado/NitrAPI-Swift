@@ -1,8 +1,8 @@
 
-open class CloudServerProduct: PartPricing {
+open class CloudServerDynamicProduct: PartPricing {
     public override init(nitrapi: Nitrapi, locationId: Int) {
         super.init(nitrapi: nitrapi, locationId: locationId)
-        product = "cloud_server"
+        product = "cloud_server_dynamic"
         additionals["image"] = "0"
     }
     

@@ -66,7 +66,7 @@ open class FileServer {
     
     // MARK: - Actions
     open func deleteFile(_ file: String) throws {
-        try nitrapi.client.dataDelete("services/\(id as Int)/gameservers/file_server/delete", parameters: ["path": file])
+        _ = try nitrapi.client.dataDelete("services/\(id as Int)/gameservers/file_server/delete", parameters: ["path": file])
     }
     
     open func deleteDirectory(_ file: String) throws {
@@ -75,17 +75,17 @@ open class FileServer {
     
     open func moveFile(_ sourceFile: String, targetDir:String, fileName: String) throws {
         if !sameDirectory(sourceFile, dir: targetDir) {
-            try nitrapi.client.dataPost("services/\(id as Int)/gameservers/file_server/move", parameters: ["source_path": sourceFile, "target_path": targetDir, "target_filename": fileName])
+            _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/file_server/move", parameters: ["source_path": sourceFile, "target_path": targetDir, "target_filename": fileName])
         }
     }
     
     open func moveDirectory(_ source: String, target:String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/file_server/move", parameters: ["source_path": source, "target_path": target])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/file_server/move", parameters: ["source_path": source, "target_path": target])
     }
     
     open func copyFile(_ sourceFile: String, targetDir:String, fileName: String) throws {
         if !sameDirectory(sourceFile, dir: targetDir) {
-            try nitrapi.client.dataPost("services/\(id as Int)/gameservers/file_server/copy", parameters: ["source_path": sourceFile, "target_path": targetDir, "target_filename": fileName])
+            _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/file_server/copy", parameters: ["source_path": sourceFile, "target_path": targetDir, "target_filename": fileName])
         }
     }
     
@@ -94,7 +94,7 @@ open class FileServer {
     }
     
     open func createDirectory(_ path: String, name: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/file_server/mkdir", parameters: ["path": path, "name": name])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/file_server/mkdir", parameters: ["path": path, "name": name])
     }
     
     open func getFileSize(_ path: String) throws -> Int {

@@ -53,7 +53,7 @@ open class Webspace: Service {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/webspaces", parameters: [:])
         let infos = WebspaceInfo()
         infos.parent = self
-        Mapper<WebspaceInfo>().map(JSON: data?["webspace"] as! [String : Any], toObject: infos)
+        _ = Mapper<WebspaceInfo>().map(JSON: data?["webspace"] as! [String : Any], toObject: infos)
     }
     
     

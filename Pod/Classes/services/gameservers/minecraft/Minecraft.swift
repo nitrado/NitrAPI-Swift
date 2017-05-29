@@ -41,7 +41,7 @@ open class Minecraft: Mappable {
     
     // MARK: - Actions
     open func changeBungeeCord(_ enabled: Bool, only: Bool, firewall: BungeeCord.FirewallStatus, firewallIp: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/bungeecord", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/bungeecord", parameters: [
             "enabled": (enabled ? "1":"0"),
             "only": (only ?"1":"0"),
             "firewall": firewall.rawValue,
@@ -50,14 +50,14 @@ open class Minecraft: Mappable {
     }
     
     open func doChunkfix(_ world: String, limit: Int) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/chunkfix", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/chunkfix", parameters: [
             "world": world,
             "limit": String(limit)
             ])
     }
     
     open func changeMcMyAdmin(_ enabled: Bool, username: String, password: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/mcmyadmin", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/mcmyadmin", parameters: [
             "enabled" : (enabled ? "1":"0"),
             "username": username,
             "password": password
@@ -65,7 +65,7 @@ open class Minecraft: Mappable {
     }
     
     open func changeRemoteToolkit(_ enabled: Bool, username: String, password: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/rtk", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/rtk", parameters: [
             "enabled" : (enabled ? "1":"0"),
             "username": username,
             "password": password
@@ -73,7 +73,7 @@ open class Minecraft: Mappable {
     }
     
     open func changeOverviewMap(_ enabled: Bool, signs: Bool, reset: Bool, ipsonly: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/overviewmap", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/overviewmap", parameters: [
             "enabled": (enabled ? "1":"0"),
             "signs": (signs ?"1":"0"),
             "reset": (reset ?"1":"0"),
@@ -82,7 +82,7 @@ open class Minecraft: Mappable {
     }
     
     open func renderOverviewMap() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/overviewmap_render", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/overviewmap_render", parameters: [:])
     }
     
     open func getOverviewMapLogs() throws -> String? {
@@ -90,7 +90,7 @@ open class Minecraft: Mappable {
     }
     
     open func changeVersion(_ md5: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/change_version", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/change_version", parameters: [
             "md5": md5
             ])
     }
@@ -112,17 +112,17 @@ open class Minecraft: Mappable {
     
     // MARK: - Backup specific
     open func createBackup(_ world: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/backup", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/backup", parameters: [
             "world": world
             ])
     }
     
     open func restoreBackup(_ timestamp: Int) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/backup/\(timestamp)/restore", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/backup/\(timestamp)/restore", parameters: [:])
     }
     
     open func destroyBackup(_ timestamp: Int) throws {
-        try nitrapi.client.dataDelete("services/\(id as Int)/gameservers/games/minecraft/backup/\(timestamp)", parameters: [:])
+        _ = try nitrapi.client.dataDelete("services/\(id as Int)/gameservers/games/minecraft/backup/\(timestamp)", parameters: [:])
     }
     
     

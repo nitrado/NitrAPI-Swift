@@ -126,7 +126,6 @@ open class DimensionValuesTransform: TransformType {
                 }
                 newPath.append(entry.element.0)
                 
-                let tmp = entry.element.1
                 handleJson(entry.element.1, path: newPath, values: &values)
             }
             

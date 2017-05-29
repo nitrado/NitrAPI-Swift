@@ -70,7 +70,6 @@ open class Pricing {
             "method": "extend",
             "service_id": "\(service)"])
         if let obj = data?["extend"] as? Dictionary<String, AnyObject> {
-            let pricesRaw = obj["prices"]
             
             if let prices = obj["prices"]! as? Dictionary<String, AnyObject> {
                 var list: [ExtensionPrice] = []
@@ -84,7 +83,7 @@ open class Pricing {
     }
     
     open func doExtendService(_ service: Int, rentalTime: Int, price: Int) throws {
-        try nitrapi.client.dataPost("order/order/\(product as String)", parameters: [
+        _ = try nitrapi.client.dataPost("order/order/\(product as String)", parameters: [
             "price": "\(price)",
             "rental_time": "\(rentalTime)",
             "service_id": "\(service)",

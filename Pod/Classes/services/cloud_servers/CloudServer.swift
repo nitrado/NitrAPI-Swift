@@ -165,28 +165,28 @@ open class CloudServer: Service {
     
     /// Creates a new backup.
     open func createBackup() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups", parameters: [:])
     }
     
     /// Restores the backup with the given id.
     /// - parameter backupId:
     open func restoreBackup(_ backupId: Int) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups/\(backupId)/restore", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups/\(backupId)/restore", parameters: [:])
     }
     
     /// Deletes the backup with the given id.
     /// - parameter backupId:
     open func deleteBackup(_ backupId: Int) throws {
-        try nitrapi.client.dataDelete("services/\(id as Int)/cloud_servers/backups/\(backupId)", parameters: [:])
+        _ = try nitrapi.client.dataDelete("services/\(id as Int)/cloud_servers/backups/\(backupId)", parameters: [:])
     }
     
     open func doBoot() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/boot", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/boot", parameters: [:])
     }
     
     /// - parameter hostname:
     open func changeHostame(_ hostname: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/hostname", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/hostname", parameters: [
             "hostname": String(hostname)
             ])
     }
@@ -194,25 +194,25 @@ open class CloudServer: Service {
     /// - parameter ipAddress:
     /// - parameter hostname:
     open func changePTREntry(_ ipAddress: String, hostname: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/ptr/\(ipAddress)", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/ptr/\(ipAddress)", parameters: [
             "hostname": String(hostname)
             ])
     }
         
     /// - parameter imageId:
     open func doReinstall(_ imageId: Int) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reinstall", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reinstall", parameters: [
             "image_id": String(imageId)
             ])
     }
     
     open func doReboot() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reboot", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reboot", parameters: [:])
     }
     
     /// A hard reset will turn of your Cloud Server instantly. This can cause data loss or file system corruption. Only trigger if the instance does not respond to normal reboots.
     open func doReset() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reset", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reset", parameters: [:])
     }
     
     /// Returns resource stats.
@@ -255,7 +255,7 @@ open class CloudServer: Service {
     }
     
     open func doShutdown() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/shutdown", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/shutdown", parameters: [:])
     }
     
     
@@ -263,6 +263,6 @@ open class CloudServer: Service {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers", parameters: [:])
         let datas = CloudServerData()
         datas.parent = self
-        Mapper<CloudServerData>().map(JSON: data?["cloud_server"] as! [String : Any], toObject: datas)
+        _ = Mapper<CloudServerData>().map(JSON: data?["cloud_server"] as! [String : Any], toObject: datas)
     }
 }

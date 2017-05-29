@@ -36,15 +36,15 @@ open class Voiceserver: Service {
     }
     
     open func doRestart() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/voiceservers/restart", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/voiceservers/restart", parameters: [:])
     }
     
     open func doStop() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/voiceservers/stop", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/voiceservers/stop", parameters: [:])
     }
     
     open func doReinstall() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/voiceservers/reinstall", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/voiceservers/reinstall", parameters: [:])
     }
     
     
@@ -52,7 +52,7 @@ open class Voiceserver: Service {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/voiceservers", parameters: [:])
         let infos = VoiceserverInfo()
         infos.parent = self
-        Mapper<VoiceserverInfo>().map(JSON: data?["voiceserver"] as! [String : Any], toObject: infos)
+        _ = Mapper<VoiceserverInfo>().map(JSON: data?["voiceserver"] as! [String : Any], toObject: infos)
     }
     
     

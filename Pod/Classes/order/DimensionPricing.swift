@@ -68,7 +68,7 @@ open class DimensionPricing: Pricing {
             params["additionals[\(key)"] = value
         }
         
-        try nitrapi.client.dataPost("order/order/\(product as String)", parameters: params)
+        _ = try nitrapi.client.dataPost("order/order/\(product as String)", parameters: params)
     }
     
     open override func switchService(_ service: Int, rentalTime: Int) throws {
@@ -87,6 +87,6 @@ open class DimensionPricing: Pricing {
             params["additionals[\(key)"] = value
         }
         
-        try nitrapi.client.dataPost("order/order/\(product as String)", parameters: params)
+        _ = try nitrapi.client.dataPost("order/order/\(product as String)", parameters: params)
     }
 }

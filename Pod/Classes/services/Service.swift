@@ -87,7 +87,7 @@ open class Service: Mappable {
     }
     
     open func changeAutoExtendMethod(_ method: Int, rentalTime: Int) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/auto_extend", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/auto_extend", parameters: [
             "auto_extend_id": "\(method)",
             "rental_time": "\(rentalTime)"
             ])

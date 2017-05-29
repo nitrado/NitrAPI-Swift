@@ -46,7 +46,7 @@ open class Bouncer: Service {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/bouncers", parameters: [:])
         let infos = BouncerInfo()
         infos.parent = self
-        Mapper<BouncerInfo>().map(JSON: data?["bouncer"] as! [String : Any], toObject: infos)
+        _ = Mapper<BouncerInfo>().map(JSON: data?["bouncer"] as! [String : Any], toObject: infos)
     }
     
     

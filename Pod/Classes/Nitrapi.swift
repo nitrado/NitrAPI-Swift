@@ -145,7 +145,7 @@ open class Nitrapi {
     
     /// Returns true if the api is operating as expecting.
     open func ping() throws -> Bool {
-        try client.dataGet(nitrapiUrl + "ping", parameters: [:])
+        _ = try client.dataGet(nitrapiUrl + "ping", parameters: [:])
         return true
     }
     

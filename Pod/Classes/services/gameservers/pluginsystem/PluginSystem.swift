@@ -22,19 +22,19 @@ open class PluginSystem {
     // MARK: - Actions
     
     open func doInstall() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/plugin_system/install", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/plugin_system/install", parameters: [:])
     }
     
     open func doUninstall() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/plugin_system/uninstall", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/plugin_system/uninstall", parameters: [:])
     }
     
     open func doRestart() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/plugin_system/restart", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/plugin_system/restart", parameters: [:])
     }
 
     open func doStop() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/plugin_system/stop", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/plugin_system/stop", parameters: [:])
     }
 
 }

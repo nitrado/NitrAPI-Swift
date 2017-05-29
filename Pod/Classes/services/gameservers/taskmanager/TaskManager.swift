@@ -29,7 +29,7 @@ open class TaskManager {
     /// - parameter method: Type of action to be run
     /// - parameter message: Optional message for restart or stop
     open func createTask(_ minute: String, hour: String, day: String, month: String, weekday: String, method: Task.ActionType, message: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/tasks", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/tasks", parameters: [
             "minute":           minute,
             "hour":             hour,
             "day":              day,
@@ -50,7 +50,7 @@ open class TaskManager {
     /// - parameter method: Type of action to be run
     /// - parameter message: Optional message for restart or stop
     open func createTask(_ taskId: Int, minute: String, hour: String, day: String, month: String, weekday: String, method: Task.ActionType, message: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/tasks/\(taskId)", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/tasks/\(taskId)", parameters: [
             "minute":           minute,
             "hour":             hour,
             "day":              day,
@@ -62,6 +62,6 @@ open class TaskManager {
     }
     
     open func deleteTask(_ taskId: Int) throws {
-        try nitrapi.client.dataDelete("services/\(id as Int)/gameservers/tasks/\(taskId)", parameters: [:])
+        _ = try nitrapi.client.dataDelete("services/\(id as Int)/gameservers/tasks/\(taskId)", parameters: [:])
     }
 }

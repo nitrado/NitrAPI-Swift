@@ -138,34 +138,34 @@ open class Gameserver: Service {
     // MARK: - Actions
     
     open func doRestart() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/restart", parameters: ["message": "Server restart requested (iOS app)"])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/restart", parameters: ["message": "Server restart requested (iOS app)"])
     }
     
     open func doStop() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/stop", parameters: ["message": "Server stop requested (iOS app)"])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/stop", parameters: ["message": "Server stop requested (iOS app)"])
     }
     
     open func doRestart(message: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/restart", parameters: ["restart_message": message, "message": "Server restart requested (iOS app)"])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/restart", parameters: ["restart_message": message, "message": "Server restart requested (iOS app)"])
     }
 
     open func doStop(message: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/stop", parameters: ["stop_message": message, "message": "Server stop requested (iOS app)"])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/stop", parameters: ["stop_message": message, "message": "Server stop requested (iOS app)"])
     }
     
  
     
     open func changeFTPPassword(_ password: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/ftp/password", parameters: ["password": password])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/ftp/password", parameters: ["password": password])
     }
     
     open func changeMySQLPassword(_ password: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/mysql/password", parameters: ["password": password])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/mysql/password", parameters: ["password": password])
     }
     
     /// Truncates the MySQL database of the gameserver.
     open func resetMySQLDatabase() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/mysql/reset", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/mysql/reset", parameters: [:])
     }
     
     
@@ -178,24 +178,24 @@ open class Gameserver: Service {
     
     /// - parameter game: folderShort of the game
     open func installGame (_ game: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/install", parameters: ["game": game])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/install", parameters: ["game": game])
     }
     
     /// - parameter game: folderShort of the game
     /// - parameter modpack: filename of the modpack
     open func installGame(_ game: String, modpack: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/install", parameters: ["game": game, "modpack": modpack])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/install", parameters: ["game": game, "modpack": modpack])
     }
     
     /// - parameter game: folderShort of the game
     open func uninstallGame(_ game: String) throws {
-        try nitrapi.client.dataDelete("services/\(id as Int)/gameservers/games/uninstall", parameters: ["game": game])
+        _ = try nitrapi.client.dataDelete("services/\(id as Int)/gameservers/games/uninstall", parameters: ["game": game])
     }
     
     /// Starts an already installed game.
     /// - parameter game: folderShort of the game
     open func startGame(_ game: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/start", parameters: ["game": game])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/start", parameters: ["game": game])
     }
     
     // MARK: Other Modules
@@ -237,13 +237,13 @@ open class Gameserver: Service {
     
     /// You have to ping the application server to send outputs for three minutes to the websocket.
     open func pingAppServer() throws {
-        try nitrapi.client.dataGet("services/\(id as Int)/gameservers/app_server", parameters: [:])
+        _ = try nitrapi.client.dataGet("services/\(id as Int)/gameservers/app_server", parameters: [:])
     }
     
     /// Sends a command to the server.
     /// Output will be send to the websocket if activated.
     open func sendCommand(_ command: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/gameservers/app_server/command", parameters: ["command": command])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/app_server/command", parameters: ["command": command])
     }
     
     // MARK: Websockets
@@ -263,7 +263,7 @@ open class Gameserver: Service {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/gameservers", parameters: [:])
         let infos = GameserverInfo()
         infos.parent = self
-        Mapper<GameserverInfo>().map(JSON: data?["gameserver"] as! [String : Any], toObject: infos)
+        _ = Mapper<GameserverInfo>().map(JSON: data?["gameserver"] as! [String : Any], toObject: infos)
     }
 
     

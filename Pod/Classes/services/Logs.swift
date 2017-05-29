@@ -11,6 +11,8 @@ open class Logs: Mappable {
         open fileprivate(set) var category: String!
         open fileprivate(set) var message: String!
         open fileprivate(set) var createdAt: Date!
+        open fileprivate(set) var ip: String!
+        open fileprivate(set) var admin: Bool!
         
         // MARK: - Initialization
         public required init?(map: Map) {
@@ -22,7 +24,8 @@ open class Logs: Mappable {
             category    <- map["category"]
             message     <- map["message"]
             createdAt   <- (map["created_at"], Nitrapi.dft)
-            
+            ip          <- map["ip"]
+            admin       <- map["admin"]
         }
         
         

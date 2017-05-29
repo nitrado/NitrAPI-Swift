@@ -72,12 +72,12 @@ open class Service: Mappable {
     }
     
     open func getLogs() throws -> Logs? {
-        let data = try nitrapi.client.dataPost("services/\(id as Int)/logs", parameters: [:])
+        let data = try nitrapi.client.dataGet("services/\(id as Int)/logs", parameters: [:])
         return Mapper<Logs>().map(JSON: data as! [String : Any])
     }
     
     open func getLogs(_ page: Int) throws -> Logs? {
-        let data = try nitrapi.client.dataPost("services/\(id as Int)/logs", parameters: ["page": String(page)])
+        let data = try nitrapi.client.dataGet("services/\(id as Int)/logs", parameters: ["page": String(page)])
         return Mapper<Logs>().map(JSON: data as! [String : Any])
     }
     

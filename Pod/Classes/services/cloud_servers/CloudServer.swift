@@ -265,4 +265,12 @@ open class CloudServer: Service {
         datas.parent = self
         _ = Mapper<CloudServerData>().map(JSON: data?["cloud_server"] as! [String : Any], toObject: datas)
     }
+    
+    override func postInit(_ nitrapi: Nitrapi) throws {
+        try super.postInit(nitrapi)
+        
+        if (status == .ACTIVE) {
+            try refresh()
+        }
+    }
 }

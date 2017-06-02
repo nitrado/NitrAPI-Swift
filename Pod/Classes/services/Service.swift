@@ -38,6 +38,7 @@ open class Service: Mappable {
     open fileprivate(set) var userId: Int!
     open fileprivate(set) var type: ServiceType!
     open fileprivate(set) var username: String!
+    open fileprivate(set) var comment: String?
     open fileprivate(set) var autoExtension: Bool!
     open fileprivate(set) var typeHuman: String!
     open fileprivate(set) var details: ServiceDetails?
@@ -58,6 +59,7 @@ open class Service: Mappable {
         userId                      <-  map["user_id"]
         type                        <-  map["type"] // TODO: enum transform?
         username                    <-  map["username"]
+        comment                     <-  map["comment"]
         autoExtension               <-  map["auto_extension"]
         typeHuman                   <-  map["type_human"]
         details                     <-  map["details"]

@@ -59,7 +59,7 @@ open class Gameserver: Service {
     open fileprivate(set) var gameserverType: GameserverType!
     open fileprivate(set) var memory: MemoryType!
     open fileprivate(set) var memoryTotal: Int!
-    open fileprivate(set) var game: String!
+    open fileprivate(set) var game: String?
     open fileprivate(set) var gameReadable: String!
     open fileprivate(set) var modpacks: [String: Modpack]!
     open fileprivate(set) var slots: Int!
@@ -129,7 +129,10 @@ open class Gameserver: Service {
     }
     
     open func isMinecraftGame() -> Bool {
-        return game.hasPrefix("mcr") && game != "mcrpocket" // mcr pocket has no minecraft features
+        if let game = game {
+            return game.hasPrefix("mcr") && game != "mcrpocket" // mcr pocket has no minecraft features
+        }
+        return false
     }
     
     

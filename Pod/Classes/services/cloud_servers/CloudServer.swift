@@ -13,24 +13,24 @@ open class CloudServer: Service {
         case INSTALLING = "installing"
         /// The Server is currently re-installing. This can take some minutes.
         case REINSTALLING = "reinstalling"
-        /// The Server is currently processing a up- or downgrade.
+        /// The Server is currently processing an up- or downgrade.
         case FLAVOUR_CHANGE = "flavour_change"
-        /// The server is currently restoring a Backup. This can take some minutes.
+        /// The Server is currently restoring a backup. This can take some minutes.
         case RESTORING = "restoring"
-        /// A error while the up- or downgrade is occurred. The support has been informed.
+        /// An error occurred while up- or downgrading. The support has been informed.
         case ERROR_FC = "error_fc"
-        /// A error while deleting the Server is occurred. The support has been informed.
+        /// An error occurred while deleting the Server. The support has been informed.
         case ERROR_DELETE = "error_delete"
-        /// A error while installing the Server is occurred. The support has been informed.
+        /// An error occurred while installing the Server. The support has been informed.
         case ERROR_INSTALL = "error_install"
-        /// A error while re-installing the Server is occurred. The support has been informed.
+        /// An error occurred while reinstalling the Server. The support has been informed.
         case ERROR_REINSTALL = "error_reinstall"
     }
     
     /// The Status of the CloudServer.
     open fileprivate(set) var cloudserverStatus: CloudserverStatus!
     /// Returns hostname.
-    open fileprivate(set) var hostname: Date!
+    open fileprivate(set) var hostname: String!
     /// Returns dynamic.
     open fileprivate(set) var dynamic: Bool!
     /// Returns hardware.
@@ -56,7 +56,7 @@ open class CloudServer: Service {
         
         func mapping(map: Map) {
             parent.cloudserverStatus <- (map["status"], EnumTransform<CloudserverStatus>())
-            parent.hostname <- (map["hostname"], Nitrapi.dft)
+            parent.hostname <- map["hostname"]
             parent.dynamic <- map["dynamic"]
             parent.hardware <- map["hardware"]
             parent.ips <- map["ips"]
@@ -152,7 +152,8 @@ open class CloudServer: Service {
             daemon <- map["daemon"]
         }
         
-    }    
+    }
+    
     
     /// Returns a list of all backups.
     /// - returns: a list of all backups.
@@ -165,28 +166,28 @@ open class CloudServer: Service {
     
     /// Creates a new backup.
     open func createBackup() throws {
-        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups", parameters: [:])
+        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups", parameters: [:])
     }
     
     /// Restores the backup with the given id.
     /// - parameter backupId:
-    open func restoreBackup(_ backupId: Int) throws {
-        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups/\(backupId)/restore", parameters: [:])
+    open func restoreBackup(_ backupId: String) throws {
+        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups/\(backupId)/restore", parameters: [:])
     }
     
     /// Deletes the backup with the given id.
     /// - parameter backupId:
-    open func deleteBackup(_ backupId: Int) throws {
-        _ = try nitrapi.client.dataDelete("services/\(id as Int)/cloud_servers/backups/\(backupId)", parameters: [:])
+    open func deleteBackup(_ backupId: String) throws {
+        try nitrapi.client.dataDelete("services/\(id as Int)/cloud_servers/backups/\(backupId)", parameters: [:])
     }
     
     open func doBoot() throws {
-        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/boot", parameters: [:])
+        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/boot", parameters: [:])
     }
     
     /// - parameter hostname:
     open func changeHostame(_ hostname: String) throws {
-        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/hostname", parameters: [
+        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/hostname", parameters: [
             "hostname": String(hostname)
             ])
     }
@@ -194,25 +195,25 @@ open class CloudServer: Service {
     /// - parameter ipAddress:
     /// - parameter hostname:
     open func changePTREntry(_ ipAddress: String, hostname: String) throws {
-        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/ptr/\(ipAddress)", parameters: [
+        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/ptr/\(ipAddress)", parameters: [
             "hostname": String(hostname)
             ])
     }
-        
+    
     /// - parameter imageId:
     open func doReinstall(_ imageId: Int) throws {
-        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reinstall", parameters: [
+        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reinstall", parameters: [
             "image_id": String(imageId)
             ])
     }
     
     open func doReboot() throws {
-        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reboot", parameters: [:])
+        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reboot", parameters: [:])
     }
     
     /// A hard reset will turn of your Cloud Server instantly. This can cause data loss or file system corruption. Only trigger if the instance does not respond to normal reboots.
     open func doReset() throws {
-        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reset", parameters: [:])
+        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/hard_reset", parameters: [:])
     }
     
     /// Returns resource stats.
@@ -255,7 +256,7 @@ open class CloudServer: Service {
     }
     
     open func doShutdown() throws {
-        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/shutdown", parameters: [:])
+        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/shutdown", parameters: [:])
     }
     
     
@@ -263,14 +264,6 @@ open class CloudServer: Service {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers", parameters: [:])
         let datas = CloudServerData()
         datas.parent = self
-        _ = Mapper<CloudServerData>().map(JSON: data?["cloud_server"] as! [String : Any], toObject: datas)
-    }
-    
-    override func postInit(_ nitrapi: Nitrapi) throws {
-        try super.postInit(nitrapi)
-        
-        if (status == .ACTIVE) {
-            try refresh()
-        }
+        Mapper<CloudServerData>().map(JSON: data?["cloud_server"] as! [String : Any], toObject: datas)
     }
 }

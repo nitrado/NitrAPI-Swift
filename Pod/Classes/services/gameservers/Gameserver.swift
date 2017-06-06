@@ -203,7 +203,7 @@ open class Gameserver: Service {
     
     // MARK: Other Modules
     open func getFileServer() -> FileServer {
-        return FileServer(id: id, nitrapi: nitrapi)
+        return FileServer(service: self, nitrapi: nitrapi)
     }
     
     open func getPluginSystem() -> PluginSystem {

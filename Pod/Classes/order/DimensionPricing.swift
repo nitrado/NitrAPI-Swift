@@ -44,12 +44,8 @@ open class DimensionPricing: Pricing {
         let price = prices![calcPath(dims)]
         if let price = price as? PriceDimensionValue {
             var cost = price.value
-            var advice = information.advice ?? 0
-            if advice > cost {
-                advice -= Int(Double(advice - cost) * (50.0 / 100.0))
-            }
-            cost -= advice
-            return cost
+            
+            return calcAdvicePrice(price: cost, advice: information.advice)
         }
         throw NitrapiError.nitrapiException(message: "Misformated json for dimension \(calcPath(dims))", errorId: nil)
     }
@@ -73,7 +69,7 @@ open class DimensionPricing: Pricing {
     
     open override func switchService(_ service: Int, rentalTime: Int) throws {
         var params = [
-            "price": "\(try getPrice(rentalTime))",
+            "price": "\(try getSwitchPrice(service, rentalTime: rentalTime))",
             "rental_time": "\(rentalTime)",
             "location": "\(locationId)",
             "method": "switch",

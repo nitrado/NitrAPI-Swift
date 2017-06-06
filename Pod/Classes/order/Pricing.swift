@@ -91,6 +91,14 @@ open class Pricing {
             ])
     }
     
+    open func calcAdvicePrice(price: Int, advice: Int) -> Int {
+        var advice2 = advice
+        if advice2 > price {
+            advice2 -= ((advice2 - price) / 2)
+        }
+        return price - advice2
+    }
+    
     
     
     

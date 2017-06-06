@@ -3,7 +3,7 @@ import ObjectMapper
 /// This class represents a CloudServer.
 open class CloudServer: Service {
     
-    /// The Status of the CloudServer.
+    /// This enum represents the status of a CloudServer.
     public enum CloudserverStatus: String {
         /// The Server is running.
         case RUNNING = "running"
@@ -27,24 +27,24 @@ open class CloudServer: Service {
         case ERROR_REINSTALL = "error_reinstall"
     }
     
-    /// The Status of the CloudServer.
-    open fileprivate(set) var cloudserverStatus: CloudserverStatus!
+    /// Returns the status of the CloudServer.
+    open fileprivate(set) var cloudserverStatus: CloudserverStatus?
     /// Returns hostname.
-    open fileprivate(set) var hostname: String!
+    open fileprivate(set) var hostname: String?
     /// Returns dynamic.
-    open fileprivate(set) var dynamic: Bool!
-    /// Returns hardware.
-    open fileprivate(set) var hardware: Hardware!
-    /// Returns ips.
-    open fileprivate(set) var ips: [Ip]!
-    /// The currently installed image.
-    open fileprivate(set) var image: Image!
-    /// True if the Cloud Server has a Nitrapi Daemon instance running.
-    open fileprivate(set) var daemonAvailable: Bool!
-    /// Returns passwordAvailable.
-    open fileprivate(set) var passwordAvailable: Bool!
-    /// Returns bandwidthLimited.
-    open fileprivate(set) var bandwidthLimited: Bool!
+    open fileprivate(set) var dynamic: Bool?
+    /// Returns the hardware details.
+    open fileprivate(set) var hardware: Hardware?
+    /// Returns the IP addresses.
+    open fileprivate(set) var ips: [Ip]?
+    /// Returns the currently installed image.
+    open fileprivate(set) var image: Image?
+    /// Returns true if the Cloud Server has a Nitrapi Daemon instance running.
+    open fileprivate(set) var daemonAvailable: Bool?
+    /// Returns true if the initial password can be received.
+    open fileprivate(set) var passwordAvailable: Bool?
+    /// Returns true if the bandwidth is limited.
+    open fileprivate(set) var bandwidthLimited: Bool?
     
     class CloudServerData : Mappable {
         weak var parent: CloudServer!
@@ -67,21 +67,22 @@ open class CloudServer: Service {
         }
     }
     
+    /// This class represents details of the hardware.
     open class Hardware: Mappable {
         /// Returns cpu.
-        open fileprivate(set) var cpu: Int!
+        open fileprivate(set) var cpu: Int?
         /// Returns ram.
-        open fileprivate(set) var ram: Int!
+        open fileprivate(set) var ram: Int?
         /// Returns windows.
-        open fileprivate(set) var windows: Bool!
+        open fileprivate(set) var windows: Bool?
         /// Returns ssd.
-        open fileprivate(set) var ssd: Int!
+        open fileprivate(set) var ssd: Int?
         /// Returns ipv4.
-        open fileprivate(set) var ipv4: Int!
-        /// The amount of high speed traffic in TB.
-        open fileprivate(set) var traffic: Int!
+        open fileprivate(set) var ipv4: Int?
+        /// Returns the amount of high speed traffic in TB.
+        open fileprivate(set) var traffic: Int?
         /// Returns backup.
-        open fileprivate(set) var backup: Int!
+        open fileprivate(set) var backup: Int?
         
         init() {
         }
@@ -98,20 +99,20 @@ open class CloudServer: Service {
             traffic <- map["traffic"]
             backup <- map["backup"]
         }
-        
     }
     
+    /// This class represents an IP Address.
     open class Ip: Mappable {
         /// Returns address.
-        open fileprivate(set) var address: String!
-        /// The ip version (4 or 6).
-        open fileprivate(set) var version: Int!
+        open fileprivate(set) var address: String?
+        /// Returns the ip version (4 or 6).
+        open fileprivate(set) var version: Int?
         /// Returns mainIp.
-        open fileprivate(set) var mainIp: Bool!
+        open fileprivate(set) var mainIp: Bool?
         /// Returns mac.
-        open fileprivate(set) var mac: String!
+        open fileprivate(set) var mac: String?
         /// Returns ptr.
-        open fileprivate(set) var ptr: String!
+        open fileprivate(set) var ptr: String?
         
         init() {
         }
@@ -126,18 +127,18 @@ open class CloudServer: Service {
             mac <- map["mac"]
             ptr <- map["ptr"]
         }
-        
     }
     
+    /// This class represents an image.
     open class Image: Mappable {
         /// Returns id.
-        open fileprivate(set) var id: Int!
+        open fileprivate(set) var id: Int?
         /// Returns name.
-        open fileprivate(set) var name: String!
+        open fileprivate(set) var name: String?
         /// Returns windows.
-        open fileprivate(set) var windows: Bool!
+        open fileprivate(set) var windows: Bool?
         /// Returns daemon.
-        open fileprivate(set) var daemon: Bool!
+        open fileprivate(set) var daemon: Bool?
         
         init() {
         }
@@ -151,9 +152,7 @@ open class CloudServer: Service {
             windows <- map["is_windows"]
             daemon <- map["daemon"]
         }
-        
     }
-    
     
     /// Returns a list of all backups.
     /// - returns: a list of all backups.
@@ -166,59 +165,64 @@ open class CloudServer: Service {
     
     /// Creates a new backup.
     open func createBackup() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups", parameters: [:])
     }
     
     /// Restores the backup with the given id.
-    /// - parameter backupId:
+    /// - parameter backupId: backupId
     open func restoreBackup(_ backupId: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups/\(backupId)/restore", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/backups/\(backupId)/restore", parameters: [:])
     }
     
     /// Deletes the backup with the given id.
-    /// - parameter backupId:
+    /// - parameter backupId: backupId
     open func deleteBackup(_ backupId: String) throws {
-        try nitrapi.client.dataDelete("services/\(id as Int)/cloud_servers/backups/\(backupId)", parameters: [:])
+        _ = try nitrapi.client.dataDelete("services/\(id as Int)/cloud_servers/backups/\(backupId)", parameters: [:])
     }
+    
     
     open func doBoot() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/boot", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/boot", parameters: [:])
     }
     
-    /// - parameter hostname:
+    
+    /// - parameter hostname: hostname
     open func changeHostame(_ hostname: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/hostname", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/hostname", parameters: [
             "hostname": String(hostname)
             ])
     }
     
-    /// - parameter ipAddress:
-    /// - parameter hostname:
+    
+    /// - parameter ipAddress: ipAddress
+    /// - parameter hostname: hostname
     open func changePTREntry(_ ipAddress: String, hostname: String) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/ptr/\(ipAddress)", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/ptr/\(ipAddress)", parameters: [
             "hostname": String(hostname)
             ])
     }
     
-    /// - parameter imageId:
+    
+    /// - parameter imageId: imageId
     open func doReinstall(_ imageId: Int) throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reinstall", parameters: [
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reinstall", parameters: [
             "image_id": String(imageId)
             ])
     }
     
+    
     open func doReboot() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reboot", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/reboot", parameters: [:])
     }
     
     /// A hard reset will turn of your Cloud Server instantly. This can cause data loss or file system corruption. Only trigger if the instance does not respond to normal reboots.
     open func doReset() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/hard_reset", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/hard_reset", parameters: [:])
     }
     
     /// Returns resource stats.
-    /// - parameter time:  valid time parameters: 1h, 4h, 1d, 7d
-    /// - returns:
+    /// - parameter time: valid time parameters: 1h, 4h, 1d, 7d
+    /// - returns: [Resource]
     open func getResourceUsage(_ time: Int) throws -> [Resource]? {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers/resources", parameters: [
             "time": String(time)
@@ -228,8 +232,9 @@ open class CloudServer: Service {
         return resources
     }
     
-    /// - parameter lines:
-    /// - returns:
+    
+    /// - parameter lines: lines
+    /// - returns: String
     open func getConsoleLogs(_ lines: Int) throws -> String? {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers/console_logs", parameters: [
             "lines": String(lines)
@@ -239,7 +244,8 @@ open class CloudServer: Service {
         return console_logs
     }
     
-    /// - returns:
+    
+    /// - returns: String
     open func getNoVNCUrl() throws -> String? {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers/console", parameters: [:])
         
@@ -247,7 +253,8 @@ open class CloudServer: Service {
         return consoleurl
     }
     
-    /// - returns:
+    
+    /// - returns: String
     open func getInitialPassword() throws -> String? {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers/password", parameters: [:])
         
@@ -255,15 +262,37 @@ open class CloudServer: Service {
         return password
     }
     
+    
     open func doShutdown() throws {
-        try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/shutdown", parameters: [:])
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/shutdown", parameters: [:])
     }
     
+    
+    /// - returns: Firewall
+    open func getFirewall() throws -> Firewall? {
+        let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers/firewall", parameters: [:])
+        
+        let firewall = Mapper<Firewall>().map(JSON: data?["firewall"] as! [String : Any])
+        firewall?.postInit(nitrapi, id: id)
+        return firewall
+    }
+    
+    open func getFileServer() -> FileServer {
+        return FileServer(service: self, nitrapi: nitrapi)
+    }
     
     open func refresh() throws {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers", parameters: [:])
         let datas = CloudServerData()
         datas.parent = self
         Mapper<CloudServerData>().map(JSON: data?["cloud_server"] as! [String : Any], toObject: datas)
+    }
+    
+    override func postInit(_ nitrapi: Nitrapi) throws {
+        try super.postInit(nitrapi)
+        
+        if status == .ACTIVE || status == .SUSPENDED {
+            try refresh()
+        }
     }
 }

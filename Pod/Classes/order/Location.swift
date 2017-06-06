@@ -6,6 +6,7 @@ open class Location: Mappable, CustomStringConvertible {
     open fileprivate(set) var city: String!
     open fileprivate(set) var bouncer: Bool!
     open fileprivate(set) var cloudServer: Bool!
+    open fileprivate(set) var cloudServerDynamic: Bool!
     open fileprivate(set) var gameserver: Bool!
     open fileprivate(set) var mumble: Bool!
     open fileprivate(set) var musicbot: Bool!
@@ -25,6 +26,7 @@ open class Location: Mappable, CustomStringConvertible {
         city        <- map["city"]
         bouncer     <- map["products.bouncer"]
         cloudServer <- map["products.cloud_server"]
+        cloudServerDynamic <- map["products.cloud_server_dynamic"]
         gameserver  <- map["products.gameserver"]
         mumble      <- map["products.mumble"]
         musicbot    <- map["products.musicbot"]
@@ -39,6 +41,8 @@ open class Location: Mappable, CustomStringConvertible {
                 return bouncer
             case "cloud_server":
                 return cloudServer
+            case "cloud_server_dynamic":
+                return cloudServerDynamic
             case "gameserver":
                 return gameserver
             case "mumble":

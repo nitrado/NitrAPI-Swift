@@ -20,7 +20,8 @@ open class PartRentalOption: Mappable {
 
 open class Price: Mappable {
     open fileprivate(set) var count: Int!
-    open fileprivate(set) var price: Int!
+    /// Price in cents. Should be a whole number unless you deal with dynamic cloud servers.
+    open fileprivate(set) var price: Double!
     
     
     

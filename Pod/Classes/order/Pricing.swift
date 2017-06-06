@@ -41,13 +41,13 @@ open class Pricing {
     }
     
     open func getPrices() throws -> PriceList {
-        return try getPrices(-1)
+        return try getPrices(nil)
     }
     
-    open func getPrices(_ service: Int) throws -> PriceList {
+    open func getPrices(_ service: Service?) throws -> PriceList {
         var cacheName = "\(locationId)"
-        if service != -1 {
-            cacheName += "/\(service)"
+        if let service = service {
+            cacheName += "/\(service.id as Int)"
         }
         if prices.keys.contains(cacheName) {
             return prices[cacheName]!
@@ -55,8 +55,8 @@ open class Pricing {
         
         var parameters: [String:String] = ["location": "\(locationId)"]
         
-        if (service != -1) {
-            parameters["sale_service"] = "\(service)"
+        if let service = service {
+            parameters["sale_service"] = "\(service.id as Int)"
         }
         
         let data = try nitrapi.client.dataGet("order/pricing/\(product as String)", parameters: parameters)
@@ -91,7 +91,13 @@ open class Pricing {
             ])
     }
     
-    open func calcAdvicePrice(price: Int, advice: Int) -> Int {
+    open func calcAdvicePrice(price: Int, advice: Int, service: Service?) -> Int {
+        
+        // Dynamic cloud servers return 100% of advice.
+        if let cloudserver = service as? CloudServer, cloudserver.dynamic == true {
+            return price-advice
+        }
+        
         var advice2 = advice
         if advice2 > price {
             advice2 -= ((advice2 - price) / 2)
@@ -103,17 +109,17 @@ open class Pricing {
     
     
     open func getPrice(_ rentalTime: Int) throws -> Int {
-        return try getPrice(-1, rentalTime: rentalTime)
+        return try getPrice(nil, rentalTime: rentalTime)
     }
-    open func getPrice(_ service: Int, rentalTime: Int) throws -> Int {
+    open func getPrice(_ service: Service?, rentalTime: Int) throws -> Int {
         return -1
     }
     open func orderService(_ rentalTime: Int) throws {
     }
-    open func getSwitchPrice(_ service: Int, rentalTime: Int) throws -> Int {
+    open func getSwitchPrice(_ service: Service?, rentalTime: Int) throws -> Int {
         return try getPrice(service, rentalTime: rentalTime)
     }
-    open func switchService(_ service: Int, rentalTime: Int) throws {
+    open func switchService(_ service: Service, rentalTime: Int) throws {
         
     }
 }

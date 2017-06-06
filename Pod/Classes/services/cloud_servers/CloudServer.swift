@@ -130,7 +130,7 @@ open class CloudServer: Service {
     }
     
     /// This class represents an image.
-    open class Image: Mappable {
+    open class Image: Mappable, CustomStringConvertible {
         /// Returns id.
         open fileprivate(set) var id: Int?
         /// Returns name.
@@ -151,6 +151,10 @@ open class CloudServer: Service {
             name <- map["name"]
             windows <- map["is_windows"]
             daemon <- map["daemon"]
+        }
+        
+        open var description: String {
+            return name ?? "undefined"
         }
     }
     
@@ -285,7 +289,7 @@ open class CloudServer: Service {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers", parameters: [:])
         let datas = CloudServerData()
         datas.parent = self
-        Mapper<CloudServerData>().map(JSON: data?["cloud_server"] as! [String : Any], toObject: datas)
+        _ = Mapper<CloudServerData>().map(JSON: data?["cloud_server"] as! [String : Any], toObject: datas)
     }
     
     override func postInit(_ nitrapi: Nitrapi) throws {

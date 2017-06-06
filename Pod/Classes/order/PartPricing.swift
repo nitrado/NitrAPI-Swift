@@ -16,7 +16,7 @@ open class PartPricing: Pricing {
         return try getPrices().parts!
     }
     
-    open override func getPrice(_ service: Int, rentalTime: Int) throws -> Int {
+    open override func getPrice(_ service: Service?, rentalTime: Int) throws -> Int {
         var rentalTime2 = rentalTime
         let prices = try getPrices(service)
         
@@ -70,7 +70,7 @@ open class PartPricing: Pricing {
         totalPrice *= multiply
         
         
-        return calcAdvicePrice(price: Int(round(totalPrice)), advice: prices.advice)
+        return calcAdvicePrice(price: Int(round(totalPrice)), advice: prices.advice, service: service)
     }
     
     open override func orderService(_ rentalTime: Int) throws {
@@ -90,13 +90,13 @@ open class PartPricing: Pricing {
         _ = try nitrapi.client.dataPost("order/order/\(product as String)", parameters: params)
     }
     
-    open override func switchService(_ service: Int, rentalTime: Int) throws {
+    open override func switchService(_ service: Service?, rentalTime: Int) throws {
         var params = [
             "price": "\(try getSwitchPrice(service, rentalTime: rentalTime))",
             "rental_time": "\(rentalTime)",
             "location": "\(locationId)",
             "method": "switch",
-            "service_id": "\(service)"
+            "service_id": "\((service?.id)! as Int)"
         ]
         for (key, value) in self.parts {
             params["parts[\(key)"] = "\(value)"

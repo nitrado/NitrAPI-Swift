@@ -91,18 +91,18 @@ open class Pricing {
             ])
     }
     
-    open func calcAdvicePrice(price: Int, advice: Int, service: Service?) -> Int {
+    open func calcAdvicePrice(price: Double, advice: Double, service: Service?) -> Int {
         
         // Dynamic cloud servers return 100% of advice.
         if let cloudserver = service as? CloudServer, cloudserver.dynamic == true {
-            return price-advice
+            return Int(price - advice)
         }
         
         var advice2 = advice
         if advice2 > price {
-            advice2 -= ((advice2 - price) / 2)
+            advice2 -= round((advice2 - price) / 2)
         }
-        return price - advice2
+        return Int(price - advice2)
     }
     
     

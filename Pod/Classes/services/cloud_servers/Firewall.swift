@@ -5,10 +5,19 @@ open class Firewall: Mappable {
     fileprivate var nitrapi: Nitrapi!
     fileprivate var id: Int!
     
-    public enum FirewallProtocol: String {
+    public enum FirewallProtocol: String, CustomStringConvertible {
         case TCP = "tcp"
         
         case UDP = "udp"
+        
+        public var description: String {
+            switch self {
+            case .TCP:
+                return "TCP"
+            case .UDP:
+                return "UDP"
+            }
+        }
     }
     
     /// Returns enabled.
@@ -62,7 +71,7 @@ open class Firewall: Mappable {
     /// - parameter number: number
     open func deleteRule(_ number: Int) throws {
         _ = try nitrapi.client.dataDelete("services/\(id as Int)/cloud_servers/firewall/remove", parameters: [
-            "": String(number)
+            "number": String(number)
             ])
     }
     
@@ -82,14 +91,25 @@ open class Firewall: Mappable {
     /// - parameter targetPort: targetPort
     /// - parameter firewallProtocol: firewallProtocol
     /// - parameter comment: comment
-    open func addRule(_ sourceIp: String, targetIp: String, targetPort: Int, firewallProtocol: FirewallProtocol, comment: String) throws {
-        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/firewall/add", parameters: [
-            "source_ip": String(describing: sourceIp),
-            "target_ip": String(describing: targetIp),
-            "target_port": String(describing: targetPort),
-            "protocol": String(describing: firewallProtocol),
-            "": String(comment)
-            ])
+    open func addRule(_ sourceIp: String?, targetIp: String?, targetPort: Int?, firewallProtocol: FirewallProtocol, comment: String) throws {
+        var parameters: Dictionary<String, String> = [
+        "protocol": String(describing: firewallProtocol),
+        "comment": String(comment)
+        ]
+        
+        if let sourceIp = sourceIp {
+            parameters["source_ip"] = sourceIp
+        }
+        
+        if let targetIp = targetIp {
+            parameters["target_ip"] = targetIp
+        }
+        
+        if let targetPort = targetPort {
+            parameters["target_port"] = String(describing: targetPort)
+        }
+        
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/firewall/add", parameters: parameters)
     }
     
     // MARK: - Internally used

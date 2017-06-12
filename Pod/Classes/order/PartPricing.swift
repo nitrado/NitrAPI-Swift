@@ -70,7 +70,7 @@ open class PartPricing: Pricing {
         totalPrice *= multiply
         
         
-        return calcAdvicePrice(price: Int(round(totalPrice)), advice: prices.advice, service: service)
+        return calcAdvicePrice(price: round(totalPrice), advice: Double(prices.advice), service: service)
     }
     
     open override func orderService(_ rentalTime: Int) throws {

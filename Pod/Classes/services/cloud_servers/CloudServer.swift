@@ -102,7 +102,7 @@ open class CloudServer: Service {
     }
     
     /// This class represents an IP Address.
-    open class Ip: Mappable {
+    open class Ip: Mappable, CustomStringConvertible {
         /// Returns address.
         open fileprivate(set) var address: String?
         /// Returns the ip version (4 or 6).
@@ -117,7 +117,12 @@ open class CloudServer: Service {
         init() {
         }
         
+        
         required public init?(map: Map) {
+        }
+        
+        public init(address: String) {
+            self.address = address
         }
         
         public func mapping(map: Map) {
@@ -126,6 +131,10 @@ open class CloudServer: Service {
             mainIp <- map["main_ip"]
             mac <- map["mac"]
             ptr <- map["ptr"]
+        }
+        
+        open var description: String {
+            return address ?? ""
         }
     }
     

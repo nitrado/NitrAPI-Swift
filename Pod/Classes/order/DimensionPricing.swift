@@ -43,7 +43,7 @@ open class DimensionPricing: Pricing {
         
         let price = prices![calcPath(dims)]
         if let price = price as? PriceDimensionValue {
-            return calcAdvicePrice(price: price.value, advice: information.advice, service: service)
+            return Int(calcAdvicePrice(price: Double(price.value), advice: Double(information.advice), service: service))
         }
         throw NitrapiError.nitrapiException(message: "Misformated json for dimension \(calcPath(dims))", errorId: nil)
     }

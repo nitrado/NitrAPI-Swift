@@ -137,7 +137,34 @@ open class FileServer {
         return data!["size"] as! Int
     }
     
+    open func supportsPermissions() -> Bool {
+        return hasPermissions
+    }
     
+    open func chown(path: String, username: String, group: String, recursive: Bool = false) throws {
+        if !hasPermissions {
+            throw NitrapiError.nitrapiException(message: "This service does not support chown.", errorId: nil)
+        }
+        
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/\(url)/file_server/chown", parameters: [
+            "path": path,
+            "username": username,
+            "group": group,
+            "recursive": recursive ? "1" : "0"
+            ])
+    }
+
+    open func chmod(path: String, chmod: String, recursive: Bool = false) throws {
+        if !hasPermissions {
+            throw NitrapiError.nitrapiException(message: "This service does not support chmod.", errorId: nil)
+        }
+        
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/\(url)/file_server/chmod", parameters: [
+            "path": path,
+            "chmod": chmod,
+            "recursive": recursive ? "1" : "0"
+            ])
+    }
     
     // MARK: - read'n write
     

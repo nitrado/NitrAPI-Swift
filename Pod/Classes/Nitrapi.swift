@@ -121,6 +121,14 @@ open class Nitrapi {
         let images = Mapper<CloudServer.Image>().mapArray(JSONArray: data?["images"] as! [[String : Any]])
         return images
     }
+    
+    open func getSSHKeys() throws -> SSHKeys? {
+        let data = try client.dataGet("user/ssh_keys", parameters: [:])
+        
+        let keys = Mapper<SSHKeys>().map(JSON: data as! [String : Any])
+        keys?.postInit(self)
+        return keys
+    }
 
     
     // MARK: - Rate Limits

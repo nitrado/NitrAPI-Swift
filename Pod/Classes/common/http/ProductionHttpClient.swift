@@ -84,6 +84,8 @@ open class ProductionHttpClient {
         
         if let statusCode = res.statusCode {
             switch statusCode {
+            case 401:
+                throw NitrapiError.nitrapiAccessTokenInvalidException(message: message)
             case 428:
                 throw NitrapiError.nitrapiConcurrencyException(message: message)
             case 503:
@@ -100,36 +102,10 @@ open class ProductionHttpClient {
     /// send a POST request with content
     open func rawPost(_ url: String, token: String, body: Data) throws {
         let res = Just.post(url, params: [:], headers: ["Token": token, "Content-Type": "application/binary"], requestBody: body )
-        
-        // get rate limit
-        if (res.headers["X-RateLimit-Limit"] != nil) {
-            rateLimit = Int(res.headers["X-RateLimit-Limit"]!)!
-            rateLimitRemaining = Int(res.headers["X-RateLimit-Remaining"]!)!
-            rateLimitReset = Int(res.headers["X-RateLimit-Reset"]!)!
-        }
-        
-        // TODO: catch res not ok
-        // TODO: check for text avaiability
-        
-        let parsedObject: Any? = try JSONSerialization.jsonObject(with: res.text!.data(using: String.Encoding.utf8)!, options: JSONSerialization.ReadingOptions.allowFragments)
-        
-        if let result = parsedObject as? NSDictionary {
-            if let status = result["status"] as? String {
-                
-                if status == "error" {
-                    // there has to be a message
-                    throw NitrapiError.nitrapiException(message: result["message"] as! String, errorId: nil)
-                }
-                
-                // everything was fine
-                return
-            }
-            
-        }
+
         if !res.ok {
             throw NitrapiError.httpException(statusCode: res.statusCode ?? -1)
         }
-        throw NitrapiError.httpException(statusCode: -1)
     }
     
     

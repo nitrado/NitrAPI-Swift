@@ -65,23 +65,23 @@ open class Pricing {
         return prices[cacheName]!
     }
     
-    open func getExtendPricesForService(_ service: Int) throws -> [ExtensionPrice]? {
+    open func getExtendPricesForService(_ service: Int, rentalTime: Int) throws -> Int? {
         let data = try nitrapi.client.dataGet("order/pricing/\(product as String)", parameters: [
             "method": "extend",
-            "service_id": "\(service)"])
+            "service_id": "\(service)",
+            "rental_time": "\(rentalTime)"
+            ])
+        
         if let obj = data?["extend"] as? Dictionary<String, AnyObject> {
+            let pricesRaw = obj["prices"]
             
             if let prices = obj["prices"]! as? Dictionary<String, AnyObject> {
-                var list: [ExtensionPrice] = []
-                for (key, value) in prices {
-                    list.append(ExtensionPrice(rentalTime: Int(key)!, price: value as! Int)!)
-                }
-                return list
+                return prices["\(rentalTime)"] as? Int
             }
         }
         return nil
     }
-    
+        
     open func doExtendService(_ service: Int, rentalTime: Int, price: Int) throws {
         _ = try nitrapi.client.dataPost("order/order/\(product as String)", parameters: [
             "price": "\(price)",

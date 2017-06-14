@@ -25,7 +25,7 @@ open class PartPricing: Pricing {
         
         if prices.hasDynamicRentalTimes() {
             if rentalTime2 % prices.minRentalTime != 0 {
-                throw NitrapiError.nitrapiException(message: "Rental time \(rentalTime2) is invalid (Modulo \(prices.minRentalTime)", errorId: nil)
+                throw NitrapiError.nitrapiException(message: "Rental time \(rentalTime2) is invalid (Modulo \(prices.minRentalTime))", errorId: nil)
             }
             multiply = Double(rentalTime2 / prices.minRentalTime)
             rentalTime2 = prices.minRentalTime

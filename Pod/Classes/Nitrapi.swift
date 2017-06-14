@@ -77,8 +77,12 @@ open class Nitrapi {
             for svc in data {
                 let service = try createService(svc)
                 if let service = service {
-                    try service.postInit(self) // attach nitrapi
-                    services.append(service)
+                    do {
+                        try service.postInit(self) // attach nitrapi
+                        services.append(service)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
         }

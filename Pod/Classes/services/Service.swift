@@ -95,6 +95,18 @@ open class Service: Mappable {
             ])
     }
     
+    /// Cancels the service.
+    /// Not supported by all product types.
+    open func cancel() throws {
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/cancel", parameters: [:])
+    }
+    
+    /// Deletes the service.
+    /// You only can delete the service if it's suspended otherwise an error will be thrown.
+    open func delete() throws {
+        _ = try nitrapi.client.dataDelete("services/\(id as Int)", parameters: [:])
+    }    
+    
     open func hasPermission(_ needRole: Role) -> Bool {
         for role in roles! {
             if role == .ROLE_OWNER {

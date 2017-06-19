@@ -167,6 +167,25 @@ open class CloudServer: Service {
         }
     }
     
+    /// This class represents a SupportAuthorization.
+    open class SupportAuthorization: Mappable {
+        /// Returns createdAt.
+        open fileprivate(set) var createdAt: Date?
+        /// Returns expiresAt.
+        open fileprivate(set) var expiresAt: Date?
+        
+        init() {
+        }
+        
+        required public init?(map: Map) {
+        }
+        
+        public func mapping(map: Map) {
+            createdAt <- (map["created_at"], Nitrapi.dft)
+            expiresAt <- (map["expires_at"], Nitrapi.dft)
+        }
+    }
+    
     /// Returns a list of all backups.
     /// - returns: a list of all backups.
     open func getBackups() throws -> [Backup]? {
@@ -299,6 +318,29 @@ open class CloudServer: Service {
         manager.postInit(nitrapi, id: id)
         return manager
     }
+    
+    /// Returns the existing support authorization or a NitrapiError if none exists.
+    /// needs permission ROLE_SUPPORT_AUTHORIZATION
+    /// - returns: SupportAuthorization
+    open func getSupportAuthorization() throws -> SupportAuthorization? {
+        let data = try nitrapi.client.dataGet("services/\(id as Int)/support_authorization", parameters: [:])
+        
+        let support_authorization = Mapper<SupportAuthorization>().map(JSON: data?["support_authorization"] as! [String : Any])
+        return support_authorization
+    }
+    
+    /// Creates a support authorization.
+    /// needs permission ROLE_SUPPORT_AUTHORIZATION
+    open func createSupportAuthorization() throws {
+        _ = try nitrapi.client.dataPost("services/\(id as Int)/support_authorization", parameters: [:])
+    }
+    
+    /// Deletes the support authorization.
+    /// needs permission ROLE_SUPPORT_AUTHORIZATION
+    open func deleteSupportAuthorization() throws {
+        _ = try nitrapi.client.dataDelete("services/\(id as Int)/support_authorization", parameters: [:])
+    }
+    
     
     open func refresh() throws {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers", parameters: [:])

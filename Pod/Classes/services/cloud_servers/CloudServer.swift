@@ -294,6 +294,12 @@ open class CloudServer: Service {
         return FileServer(service: self, nitrapi: nitrapi)
     }
     
+    open func getAppManager() -> AppsManager {
+        let manager = AppsManager()
+        manager.postInit(nitrapi, id: id)
+        return manager
+    }
+    
     open func refresh() throws {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers", parameters: [:])
         let datas = CloudServerData()

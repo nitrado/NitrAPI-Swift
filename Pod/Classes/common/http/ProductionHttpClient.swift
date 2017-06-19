@@ -37,7 +37,13 @@ open class ProductionHttpClient {
         let res = Just.post(nitrapiUrl + url, params: ["access_token": accessToken, "locale": locale ?? "en"], data: parameters)
 
        return try parseResult(res)
+    }
+    
+    /// send a PUT request
+    open func dataPut(_ url: String,parameters: Dictionary<String, String>) throws -> NSDictionary? {
+        let res = Just.put(nitrapiUrl + url, params: ["access_token": accessToken, "locale": locale ?? "en"], data: parameters)
         
+        return try parseResult(res)
     }
     
     /// send a DELETE request

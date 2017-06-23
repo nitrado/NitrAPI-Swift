@@ -134,11 +134,15 @@ open class AppsManager: Mappable {
     /// - parameter appType: Valid application type from available list.
     /// - parameter appName: Name for the new application, only /^[a-zA-Z0-9\_]{1,16}$/ allowed.
     /// - parameter ports: ports
-    open func install(_ appType: String, appName: String, ports: [String: String]) throws {
+    open func install(_ appType: String, appName: String, ip: String?, ports: [String: String]) throws {
         var params = [
             "app_type": String(describing: appType),
             "app_name": String(describing: appName)
         ]
+        
+        if let ip = ip {
+            params["ip"] = ip
+        }
         
         for (key, value) in ports {
             params["ports[\(key)"] = value

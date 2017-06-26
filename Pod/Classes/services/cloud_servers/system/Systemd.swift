@@ -90,7 +90,17 @@ open class Systemd: Mappable {
         _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/system/units/daemon_reload", parameters: [:])
     }
     
-    /// Enable a unit so it is automatically run on startup.
+    /// Returns details for one Systemd unit.
+    /// - parameter unitName: unitName
+    /// - returns: Unit
+    open func getUnit(_ unitName: String) throws -> Unit? {
+        let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers/system/units/\(unitName)", parameters: [:])
+        
+        let unit = Mapper<Unit>().map(JSON: data?["unit"] as! [String : Any])
+        return unit
+    }
+    
+    /// Enables a unit so it is automatically run on startup.
     /// - parameter unitName: unitName
     open func enableUnit(_ unitName: String) throws {
         _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/system/units/\(unitName)/enable", parameters: [:])
@@ -140,6 +150,7 @@ open class Systemd: Mappable {
         _ = try nitrapi.client.dataPost("services/\(id as Int)/cloud_servers/system/units/\(unitName)/reset_failed", parameters: [:])
     }
     
+
     /// Restarts a unit.
     /// - parameter unitName: unitName
     /// - parameter replace: Replace a job that is already running

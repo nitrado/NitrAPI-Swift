@@ -341,6 +341,12 @@ open class CloudServer: Service {
         _ = try nitrapi.client.dataDelete("services/\(id as Int)/support_authorization", parameters: [:])
     }
     
+    open func getSystemd() -> Systemd {
+        let systemd = Systemd()
+        systemd.postInit(nitrapi, id: id)
+        return systemd
+    }
+    
     
     open func refresh() throws {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers", parameters: [:])

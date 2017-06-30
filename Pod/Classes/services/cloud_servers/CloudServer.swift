@@ -347,6 +347,12 @@ open class CloudServer: Service {
         return systemd
     }
     
+    open func getJournald() -> Journald {
+        let journald = Journald()
+        journald.postInit(nitrapi, id: id)
+        return journald
+    }
+    
     
     open func refresh() throws {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers", parameters: [:])

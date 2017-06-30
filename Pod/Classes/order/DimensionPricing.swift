@@ -71,8 +71,9 @@ open class DimensionPricing: Pricing {
             "rental_time": "\(rentalTime)",
             "location": "\(locationId)",
             "method": "switch",
-            "service_id": "\(service.id)"
+            "service_id": "\(service.id as Int)"
         ]
+        
         for (key, value) in self.dimensions {
             params["dimensions[\(key)"] = value
         }

@@ -186,6 +186,50 @@ open class CloudServer: Service {
         }
     }
     
+    /// This class represents a Group.
+    open class Group: Mappable {
+        /// Returns id.
+        open fileprivate(set) var id: Int?
+        /// Returns name.
+        open fileprivate(set) var name: String?
+        
+        init() {
+        }
+        
+        required public init?(map: Map) {
+        }
+        
+        public func mapping(map: Map) {
+            id <- map["id"]
+            name <- map["name"]
+        }
+    }
+    
+    /// This class represents an User.
+    open class User: Mappable {
+        /// Returns username.
+        open fileprivate(set) var username: String?
+        /// Returns groups.
+        open fileprivate(set) var groups: [Group]?
+        /// Returns id.
+        open fileprivate(set) var id: Int?
+        /// Returns home.
+        open fileprivate(set) var home: String?
+        
+        init() {
+        }
+        
+        required public init?(map: Map) {
+        }
+        
+        public func mapping(map: Map) {
+            username <- map["username"]
+            groups <- map["groups"]
+            id <- map["id"]
+            home <- map["home"]
+        }
+    }
+    
     /// Returns a list of all backups.
     /// - returns: a list of all backups.
     open func getBackups() throws -> [Backup]? {
@@ -351,6 +395,15 @@ open class CloudServer: Service {
         let journald = Journald()
         journald.postInit(nitrapi, id: id)
         return journald
+    }
+    
+    /// List all the users (with groups) on a Cloud Server. These users are located in the /etc/passwd. All newly creates users on the system are included in this array.
+    /// - returns: [User]
+    open func getUsers() throws -> [User]? {
+        let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers/user", parameters: [:])
+        
+        let usersusers = Mapper<User>().mapArray(JSONArray: ((data?["users"] as! [String: Any]) ["users"] as! [[String : Any]]))
+        return usersusers
     }
     
     

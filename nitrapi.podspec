@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "nitrapi"
-  s.version          = "1.0.1"
+  s.version          = "1.1.0"
   s.summary          = "Swift based SDK for the Nitrapi"
 
   s.description      = "Nitrapi Swift SDK"

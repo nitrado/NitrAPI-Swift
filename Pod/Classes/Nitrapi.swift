@@ -133,6 +133,13 @@ open class Nitrapi {
         keys?.postInit(self)
         return keys
     }
+    
+    open func getAccessToken() throws -> AccessToken? {
+        let data = try client.dataGet("token", parameters: [:])
+        
+        let images = Mapper<AccessToken>().map(JSON: data?["token"] as! [String : Any])
+        return images
+    }
 
     
     // MARK: - Rate Limits

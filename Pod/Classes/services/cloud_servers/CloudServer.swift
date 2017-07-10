@@ -146,9 +146,11 @@ open class CloudServer: Service {
         open fileprivate(set) var name: String?
         /// Returns windows.
         open fileprivate(set) var windows: Bool?
-        /// Returns daemon.
-        open fileprivate(set) var daemon: Bool?
-        
+        /// Returns hasDaemon.
+        open fileprivate(set) var hasDaemon: Bool?
+        /// Returns isDaemonCompatible.
+        open fileprivate(set) var isDaemonCompatible: Bool?
+        open fileprivate(set) var isDefault: Bool?
         init() {
         }
         
@@ -159,9 +161,11 @@ open class CloudServer: Service {
             id <- map["id"]
             name <- map["name"]
             windows <- map["is_windows"]
-            daemon <- map["daemon"]
+            hasDaemon <- map["has_daemon"]
+            isDaemonCompatible <- map["is_daemon_compatible"]
+            isDefault <- map["default"]
         }
-        
+
         open var description: String {
             return name ?? "undefined"
         }

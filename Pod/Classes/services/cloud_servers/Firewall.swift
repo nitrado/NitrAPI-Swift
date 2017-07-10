@@ -7,8 +7,9 @@ open class Firewall: Mappable {
     
     public enum FirewallProtocol: String, CustomStringConvertible {
         case TCP = "tcp"
-        
         case UDP = "udp"
+        case ICMP = "icmp"
+        case ANY = "any"
         
         public var description: String {
             switch self {
@@ -16,6 +17,23 @@ open class Firewall: Mappable {
                 return "TCP"
             case .UDP:
                 return "UDP"
+            case .ICMP:
+                return "ICMP"
+            case .ANY:
+                return "ANY"
+            }
+        }
+        
+        public var internDesc: String {
+            switch self {
+            case .TCP:
+                return "tcp"
+            case .UDP:
+                return "udp"
+            case .ICMP:
+                return "icmp"
+            case .ANY:
+                return "any"
             }
         }
     }
@@ -93,11 +111,11 @@ open class Firewall: Mappable {
     /// - parameter comment: comment
     open func addRule(_ sourceIp: String?, targetIp: String?, targetPort: Int?, firewallProtocol: FirewallProtocol, comment: String) throws {
         var parameters: Dictionary<String, String> = [
-        "protocol": String(describing: firewallProtocol),
+        "protocol": firewallProtocol.internDesc,
         "comment": String(comment)
         ]
         
-        if let sourceIp = sourceIp {
+        if let sourceIp = sourceIp, sourceIp != "*" {
             parameters["source_ip"] = sourceIp
         }
         

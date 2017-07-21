@@ -234,6 +234,64 @@ open class CloudServer: Service {
         }
     }
     
+    /// This class represents a current_month.
+    open class CurrentMonth: Mappable {
+        /// Returns used traffic in MB.
+        open fileprivate(set) var used: Int?
+        /// Returns available traffic in MB.
+        open fileprivate(set) var available: Int?
+        
+        init() {
+        }
+        
+        required public init?(map: Map) {
+        }
+        
+        public func mapping(map: Map) {
+            used <- map["used"]
+            available <- map["available"]
+        }
+    }
+    
+    /// This class represents a TrafficEntry.
+    open class TrafficEntry: Mappable {
+        /// Returns incoming traffic in MB.
+        open fileprivate(set) var incoming: Int?
+        /// Returns outgoing traffic in MB.
+        open fileprivate(set) var outgoing: Int?
+        
+        init() {
+        }
+        
+        required public init?(map: Map) {
+        }
+        
+        public func mapping(map: Map) {
+            incoming <- map["incoming"]
+            outgoing <- map["outgoing"]
+        }
+    }
+    
+    /// This class represents a TrafficStatistics.
+    open class TrafficStatistics: Mappable {
+        /// Returns currentMonth.
+        open fileprivate(set) var currentMonth: CurrentMonth?
+        /// Returns last31Days.
+        open fileprivate(set) var last31Days: [String: TrafficEntry]?
+        
+        init() {
+        }
+        
+        required public init?(map: Map) {
+        }
+        
+        public func mapping(map: Map) {
+            currentMonth <- map["current_month"]
+            last31Days <- map["last_31_days"]
+        }
+    }
+    
+    
     /// Returns a list of all backups.
     /// - returns: a list of all backups.
     open func getBackups() throws -> [Backup]? {
@@ -410,6 +468,14 @@ open class CloudServer: Service {
         return usersusers
     }
     
+    /// Returns the daily traffic usage of the last 30 days.
+    /// - returns: TrafficStatistics
+    open func getTrafficStatistics() throws -> TrafficStatistics? {
+        let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers/traffic", parameters: [:])
+        
+        let traffic = Mapper<TrafficStatistics>().map(JSON: data?["traffic"] as! [String : Any])
+        return traffic
+    }
     
     open func refresh() throws {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers", parameters: [:])

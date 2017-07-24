@@ -303,9 +303,9 @@ open class CloudServer: Service {
     /// Returns resource stats.
     /// - parameter time: valid time parameters: 1h, 4h, 1d, 7d
     /// - returns: [Resource]
-    open func getResourceUsage(_ time: Int) throws -> [Resource]? {
+    open func getResourceUsage(_ time: String) throws -> [Resource]? {
         let data = try nitrapi.client.dataGet("services/\(id as Int)/cloud_servers/resources", parameters: [
-            "time": String(time)
+            "time": time
             ])
         
         let resources = Mapper<Resource>().mapArray(JSONArray: data?["resources"] as! [[String : Any]])

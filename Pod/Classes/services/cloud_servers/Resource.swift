@@ -6,7 +6,7 @@ open class Resource: Mappable {
     /// Returns type.
     open fileprivate(set) var type: String!
     /// Returns datapoints.
-    open fileprivate(set) var datapoints: [Date: Float]!
+    open fileprivate(set) var datapoints: [String: Float]!
     
     init() {
     }

@@ -5,7 +5,6 @@ open class Stats: Mappable {
     // MARK: - Attributes
     
     open fileprivate(set) var currentPlayers: [[Int]]!
-    open fileprivate(set) var maxPlayers: [[Int]]!
     open fileprivate(set) var cpuUsage: [[Int]]!
     open fileprivate(set) var memoryUsage: [[Int]]!
     
@@ -17,7 +16,6 @@ open class Stats: Mappable {
     
     open func mapping(map: Map) {
         currentPlayers  <- map["currentPlayers"]
-        maxPlayers      <- map["maxPlayers"]
         cpuUsage        <- map["cpuUsage"]
         memoryUsage     <- map["memoryUsage"]
     }

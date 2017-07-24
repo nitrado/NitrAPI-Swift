@@ -231,7 +231,7 @@ open class Gameserver: Service {
     }
     
     open func getStats(_ hours: Int) throws -> Stats? {
-        let data = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/stats", parameters: ["hours": String(hours)])
+        let data = try nitrapi.client.dataGet("services/\(id as Int)/gameservers/stats", parameters: ["hours": String(hours)])
         return Mapper<Stats>().map(JSON: data?["stats"] as! [String : Any])
     }
     

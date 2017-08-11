@@ -42,6 +42,8 @@ open class Gameserver: Service {
         case OVERVIEWMAP_RENDER = "overviewmap_render"
         /// The host of this gameserver is currently unreachable.
         case HOST_DOWN = "hostdown"
+        /// The server is currently updating.
+        case UPDATING = "updating"
     }
     
     // MARK: - Attributes

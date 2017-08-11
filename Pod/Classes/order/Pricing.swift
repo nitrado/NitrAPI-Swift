@@ -28,7 +28,7 @@ open class Pricing {
         let locations = Mapper<Location>().mapArray(JSONArray: data?["locations"] as! [[String : Any]])
         var avaiable: [Location] = []
         
-        for loc in locations! {
+        for loc in locations {
             if loc.hasService(product!) {
                 avaiable.append(loc)
             }

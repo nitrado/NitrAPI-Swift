@@ -4,9 +4,9 @@ open class Stats: Mappable {
     
     // MARK: - Attributes
     
-    open fileprivate(set) var currentPlayers: [[Int]]!
-    open fileprivate(set) var cpuUsage: [[Int]]!
-    open fileprivate(set) var memoryUsage: [[Int]]!
+    open fileprivate(set) var currentPlayers: [[Int?]]?
+    open fileprivate(set) var cpuUsage: [[Int?]]?
+    open fileprivate(set) var memoryUsage: [[Int?]]?
     
     // MARK: - Initialization
     

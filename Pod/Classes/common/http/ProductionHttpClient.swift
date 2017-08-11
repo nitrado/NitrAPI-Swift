@@ -67,6 +67,10 @@ open class ProductionHttpClient {
             errorId = res.headers["X-Raven-Event-ID"]
         }
         
+        if res.response == nil {
+            throw NitrapiError.httpException(statusCode: res.statusCode ?? -1)
+        }
+        
         let parsedObject: Any? = try JSONSerialization.jsonObject(with: res.text!.data(using: String.Encoding.utf8)!, options: JSONSerialization.ReadingOptions.allowFragments)
         
         var message: String = "Unknown error."

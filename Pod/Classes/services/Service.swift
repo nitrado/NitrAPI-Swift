@@ -142,7 +142,7 @@ open class Service: Mappable {
         let now = Date()
         if deleteDate?.compare(now) == ComparisonResult.orderedAscending && status != .DELETED {
             status = .DELETING
-        } else if suspendDate?.compare(now) == ComparisonResult.orderedAscending && status != .SUSPENDED {
+        } else if suspendDate?.compare(now) == ComparisonResult.orderedAscending && status != .SUSPENDED && status != .DELETED {
             status = .SUSPENDING
         }
     }

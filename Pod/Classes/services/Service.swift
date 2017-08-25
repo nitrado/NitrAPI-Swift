@@ -27,6 +27,12 @@ open class Service: Mappable {
         case ADMINLOCKED_SUSPENDED = "adminlocked_suspended"
         /// The service is deleted
         case DELETED = "deleted"
+        
+        // These statuses are set by fixServiceStatus() if suspendDate or deleteDate are in the past.
+        /// The service is currently being suspended.
+        case SUSPENDING
+        /// The service is currently being deleted.
+        case DELETING
     }
     
     // MARK: - Attributes
@@ -123,9 +129,21 @@ open class Service: Mappable {
     
     func postInit(_ nitrapi: Nitrapi) throws {
         self.nitrapi = nitrapi
+        
+        fixServiceStatus()
     }
     
     open func setAutoExtension(_ autoExtension: Bool) {
         self.autoExtension = autoExtension
+    }
+    
+    /// Sets the status correctly if suspendDate or deleteDate are in the past.
+    func fixServiceStatus() {
+        let now = Date()
+        if deleteDate?.compare(now) == ComparisonResult.orderedAscending && status != .DELETED {
+            status = .DELETING
+        } else if suspendDate?.compare(now) == ComparisonResult.orderedAscending && status != .SUSPENDED {
+            status = .SUSPENDING
+        }
     }
 }

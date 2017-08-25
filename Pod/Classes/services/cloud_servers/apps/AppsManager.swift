@@ -93,6 +93,8 @@ open class AppsManager: Mappable {
         open fileprivate(set) var supportsIpBinding: Bool?
         /// Returns ports.
         open fileprivate(set) var ports: [Port]?
+        /// Returns the minimum requirements.
+        open fileprivate(set) var minimumRequirements: MinimumRequirements?
         
         init() {
         }
@@ -106,6 +108,29 @@ open class AppsManager: Mappable {
             description <- map["description"]
             supportsIpBinding <- map["supports_ip_binding"]
             ports <- map["ports"]
+            minimumRequirements <- map["minimum_requirements"]
+        }
+    }
+    
+    /// This class represents the minimum requirements.
+    open class MinimumRequirements: Mappable {
+        /// Returns needed cpu cores.
+        open fileprivate(set) var cpu: Int?
+        /// Returns needed RAM in MB.
+        open fileprivate(set) var ram: Int?
+        /// Returns needed SSD space in GB.
+        open fileprivate(set) var ssd: Int?
+        
+        init() {
+        }
+        
+        required public init?(map: Map) {
+        }
+        
+        public func mapping(map: Map) {
+            cpu <- map["cpu"]
+            ram <- map["ram"]
+            ssd <- map["ssd"]
         }
     }
     

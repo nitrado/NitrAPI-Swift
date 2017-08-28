@@ -1,8 +1,8 @@
 import ObjectMapper
 
 open class PartRentalOption: Mappable {
-    open fileprivate(set) var hours: Int!
-    open fileprivate(set) var prices: [Price]!
+    open fileprivate(set) var hours: Int?
+    open fileprivate(set) var prices: [Price]?
     
     
     
@@ -19,9 +19,9 @@ open class PartRentalOption: Mappable {
 }
 
 open class Price: Mappable {
-    open fileprivate(set) var count: Int!
+    open fileprivate(set) var count: Int?
     /// Price in cents. Should be a whole number unless you deal with dynamic cloud servers.
-    open fileprivate(set) var price: Double!
+    open fileprivate(set) var price: Double?
     
     
     

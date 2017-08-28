@@ -5,10 +5,10 @@ open class Credentials: Mappable {
     
     // MARK: - Attributes
     
-    open fileprivate(set) var hostname: String!
-    open fileprivate(set) var port: Int!
-    open fileprivate(set) var username: String!
-    open fileprivate(set) var password: String!
+    open fileprivate(set) var hostname: String?
+    open fileprivate(set) var port: Int?
+    open fileprivate(set) var username: String?
+    open fileprivate(set) var password: String?
     /// Database for MySQL-databases
     open fileprivate(set) var database: String?
     

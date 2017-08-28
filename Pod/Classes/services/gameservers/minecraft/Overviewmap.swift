@@ -3,14 +3,14 @@ import ObjectMapper
 open class Overviewmap: Mappable {
     
     // MARK: - Attributes
-    open fileprivate(set) var enabled: Bool!
-    open fileprivate(set) var url: String!
-    open fileprivate(set) var signs: Bool!
-    open fileprivate(set) var ipsonly: [String]!
-    open fileprivate(set) var reset: Bool!
-    open fileprivate(set) var lastReset: Date!
-    open fileprivate(set) var lastEnable: Date!
-    open fileprivate(set) var modified: Date!
+    open fileprivate(set) var enabled: Bool?
+    open fileprivate(set) var url: String?
+    open fileprivate(set) var signs: Bool?
+    open fileprivate(set) var ipsonly: [String]?
+    open fileprivate(set) var reset: Bool?
+    open fileprivate(set) var lastReset: Date?
+    open fileprivate(set) var lastEnable: Date?
+    open fileprivate(set) var modified: Date?
     
 
     // MARK: - Initialization

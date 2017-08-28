@@ -31,8 +31,10 @@ open class DimensionPricing: Pricing {
         
         let realDims = information.dimensions
         for dim in realDims! {
-            if dimensions.keys.contains(dim.id) {
-                dims.append(dimensions[dim.id]!)
+            if let id = dim.id {
+                if dimensions.keys.contains(id) {
+                    dims.append(dimensions[id]!)
+                }
             }
         }
         dims.append("\(rentalTime)")
@@ -43,7 +45,7 @@ open class DimensionPricing: Pricing {
         
         let price = prices![calcPath(dims)]
         if let price = price as? PriceDimensionValue {
-            return Int(calcAdvicePrice(price: Double(price.value), advice: Double(information.advice), service: service))
+            return Int(calcAdvicePrice(price: Double(price.value), advice: Double(information.advice!), service: service))
         }
         throw NitrapiError.nitrapiException(message: "Misformated json for dimension \(calcPath(dims))", errorId: nil)
     }

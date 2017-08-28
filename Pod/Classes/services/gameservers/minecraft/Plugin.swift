@@ -6,9 +6,9 @@ open class Plugin: Mappable {
     open class Command: Mappable {
         
         // MARK: - Attributes
-        open fileprivate(set) var description: String!
+        open fileprivate(set) var description: String?
         /// Usage example for this command
-        open fileprivate(set) var usage: String!
+        open fileprivate(set) var usage: String?
         
         // MARK: - Initialization
         public required init?(map: Map) {
@@ -24,16 +24,16 @@ open class Plugin: Mappable {
     }
     
     // MARK: - Attributes
-    open fileprivate(set) var file: String!
+    open fileprivate(set) var file: String?
 
-    open fileprivate(set) var name: String!
-    open fileprivate(set) var main: String!
-    open fileprivate(set) var version: String!
-    open fileprivate(set) var author: String!
-    open fileprivate(set) var authors: [String]!
-    open fileprivate(set) var softDepent: [String]!
-    open fileprivate(set) var description: String!
-    open fileprivate(set) var commands: [String: Command]!
+    open fileprivate(set) var name: String?
+    open fileprivate(set) var main: String?
+    open fileprivate(set) var version: String?
+    open fileprivate(set) var author: String?
+    open fileprivate(set) var authors: [String]?
+    open fileprivate(set) var softDepent: [String]?
+    open fileprivate(set) var description: String?
+    open fileprivate(set) var commands: [String: Command]?
     
     
     // MARK: - Initialization

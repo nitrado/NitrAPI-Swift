@@ -4,19 +4,19 @@ import ObjectMapper
 open class Customer: Mappable {
     internal var nitrapi: Nitrapi!
     
-    open fileprivate(set) var userId: Int!
+    open fileprivate(set) var userId: Int?
     /// username of the customer
-    open fileprivate(set) var username: String!
-    open fileprivate(set) var timezone: String!
-    open fileprivate(set) var email: String!
-    open fileprivate(set) var credit: Int!
-    open fileprivate(set) var currency: String! // TODO: enum?
-    open fileprivate(set) var registered: Date!
-    open fileprivate(set) var language: String!
+    open fileprivate(set) var username: String?
+    open fileprivate(set) var timezone: String?
+    open fileprivate(set) var email: String?
+    open fileprivate(set) var credit: Int?
+    open fileprivate(set) var currency: String? // TODO: enum?
+    open fileprivate(set) var registered: Date?
+    open fileprivate(set) var language: String?
     /// URL of the avatar
-    open fileprivate(set) var avatar: String!
+    open fileprivate(set) var avatar: String?
     /// personal details
-    open fileprivate(set) var profile: Dictionary<String, String>!
+    open fileprivate(set) var profile: Dictionary<String, String>?
     
     // MARK: - Initialization
     public required init?(map: Map) {

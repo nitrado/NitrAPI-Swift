@@ -1,13 +1,13 @@
  import ObjectMapper
  
  open class AutoExtendMethod: Mappable, CustomStringConvertible {
-    open fileprivate(set) var id: Int!
+    open fileprivate(set) var id: Int?
     open fileprivate(set) var name: String?
     open fileprivate(set) var descr: String?
-    open fileprivate(set) var available: Bool!
-    open fileprivate(set) var active: Bool!
+    open fileprivate(set) var available: Bool?
+    open fileprivate(set) var active: Bool?
     open fileprivate(set) var paymentMethod: String?
-    open fileprivate(set) var rentalTimes: [String: Int]!
+    open fileprivate(set) var rentalTimes: [String: Int]?
     
     // MARK: - Initialization
     public required init?(map: Map) {

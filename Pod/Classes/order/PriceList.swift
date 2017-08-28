@@ -2,11 +2,11 @@ import ObjectMapper
 
 open class PriceList: Mappable {
     
-    open fileprivate(set) var advice: Int!
+    open fileprivate(set) var advice: Int?
     
     fileprivate var rentalTimes: [Int]?
-    open fileprivate(set) var minRentalTime: Int!
-    open fileprivate(set) var maxRentalTime: Int!
+    open fileprivate(set) var minRentalTime: Int?
+    open fileprivate(set) var maxRentalTime: Int?
     fileprivate var dynamicRentalTimes: Bool = false
     
     
@@ -37,8 +37,8 @@ open class PriceList: Mappable {
         if rentalTimes == nil {
             dynamicRentalTimes = true
             var times: [Int] = []
-            var i: Int = minRentalTime
-            while i <= maxRentalTime {
+            var i: Int = minRentalTime!
+            while i <= maxRentalTime! {
                 times.append(i)
                 i += 24
             }

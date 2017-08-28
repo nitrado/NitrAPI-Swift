@@ -3,8 +3,8 @@ import ObjectMapper
 open class GameList: Mappable {
     
     // MARK: - Attributes
-    open fileprivate(set) var currentlyInstalled: Int!
-    open fileprivate(set) var maximumInstalled: Int!
+    open fileprivate(set) var currentlyInstalled: Int?
+    open fileprivate(set) var maximumInstalled: Int?
     /// List of all games.
     open fileprivate(set) var games: [Game]!
     

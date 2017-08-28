@@ -5,16 +5,16 @@ open class Query: Mappable {
     
     /// A Player on a gameserver.
     open class Player: Mappable {
-        open fileprivate(set) var id: Int!
-        open fileprivate(set) var name: String!
+        open fileprivate(set) var id: Int?
+        open fileprivate(set) var name: String?
         /// Is this player a bot?
-        open fileprivate(set) var bot: Bool!
-        open fileprivate(set) var score: Int!
-        open fileprivate(set) var frags: Int!
-        open fileprivate(set) var deaths: Int!
+        open fileprivate(set) var bot: Bool?
+        open fileprivate(set) var score: Int?
+        open fileprivate(set) var frags: Int?
+        open fileprivate(set) var deaths: Int?
         /// Time the player has spend on the server in seconds.
-        open fileprivate(set) var time: Int!
-        open fileprivate(set) var ping: Int!
+        open fileprivate(set) var time: Int?
+        open fileprivate(set) var ping: Int?
         
         public required init?(map: Map) {
             

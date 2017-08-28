@@ -2,10 +2,10 @@ import ObjectMapper
 
 open class Part: Mappable {
 
-    open fileprivate(set) var type: String!
+    open fileprivate(set) var type: String?
     open fileprivate(set) var name: String?
-    open fileprivate(set) var minCount: Int!
-    open fileprivate(set) var maxCount: Int!
+    open fileprivate(set) var minCount: Int?
+    open fileprivate(set) var maxCount: Int?
     open fileprivate(set) var steps: [Int]?
     open fileprivate(set) var stepNames: [String: String]?
     open fileprivate(set) var optional: Bool?

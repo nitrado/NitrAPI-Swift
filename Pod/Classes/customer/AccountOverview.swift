@@ -2,9 +2,9 @@ import ObjectMapper
 
 open class AccountOverview: Mappable {
     
-    open fileprivate(set) var from: Date!
-    open fileprivate(set) var end: Date!
-    open fileprivate(set) var payments: [Payment]!
+    open fileprivate(set) var from: Date?
+    open fileprivate(set) var end: Date?
+    open fileprivate(set) var payments: [Payment]?
     
     public required init?(map: Map) {
     }
@@ -21,19 +21,19 @@ open class AccountOverview: Mappable {
     }
     
     open class Payment: Mappable {
-        open fileprivate(set) var id: Int!
+        open fileprivate(set) var id: Int?
         open fileprivate(set) var invoiceId: String?
         open fileprivate(set) var serviceId: Int?
         open fileprivate(set) var switchedServiceId: Int?
         open fileprivate(set) var donation: Donation?
-        open fileprivate(set) var date: Date!
+        open fileprivate(set) var date: Date?
         open fileprivate(set) var method: String?
         open fileprivate(set) var duration: Int?
-        open fileprivate(set) var amount: Int!
+        open fileprivate(set) var amount: Int?
         open fileprivate(set) var type: IncOrDec?
-        open fileprivate(set) var currency: String!
-        open fileprivate(set) var ip: String!
-        open fileprivate(set) var refundable: Bool!
+        open fileprivate(set) var currency: String?
+        open fileprivate(set) var ip: String?
+        open fileprivate(set) var refundable: Bool?
         open fileprivate(set) var providerFee: Int?
         open fileprivate(set) var lastStatus: String?
         
@@ -62,8 +62,8 @@ open class AccountOverview: Mappable {
     
     open class Donation: Mappable {
         
-        open fileprivate(set) var senderUserId: Int!
-        open fileprivate(set) var receiverUserId: Int!
+        open fileprivate(set) var senderUserId: Int?
+        open fileprivate(set) var receiverUserId: Int?
         open fileprivate(set) var subject: String?
         
         public required init?(map: Map) {

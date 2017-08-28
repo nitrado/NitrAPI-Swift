@@ -7,16 +7,16 @@ open class Minecraft: Mappable {
     
     // MARK: - Attributes
     /// Is there a task running and no other task can be started? e.g. overviewmap rendering
-    open fileprivate(set) var taskRunning: Bool!
-    open fileprivate(set) var currentWorld: String!
-    open fileprivate(set) var allWorlds: [World]!
-    open fileprivate(set) var worldBackups: [World]!
-    open fileprivate(set) var binaryMD5: String!
-    open fileprivate(set) var binary: String!
-    open fileprivate(set) var overviewmap: Overviewmap!
-    open fileprivate(set) var mcmyadmin: McMyAdmin!
-    open fileprivate(set) var bungeecord: BungeeCord!
-    open fileprivate(set) var remoteToolkit: RemoteToolkit!
+    open fileprivate(set) var taskRunning: Bool?
+    open fileprivate(set) var currentWorld: String?
+    open fileprivate(set) var allWorlds: [World]?
+    open fileprivate(set) var worldBackups: [World]?
+    open fileprivate(set) var binaryMD5: String?
+    open fileprivate(set) var binary: String?
+    open fileprivate(set) var overviewmap: Overviewmap?
+    open fileprivate(set) var mcmyadmin: McMyAdmin?
+    open fileprivate(set) var bungeecord: BungeeCord?
+    open fileprivate(set) var remoteToolkit: RemoteToolkit?
     open fileprivate(set) var versions: [Version]?
     
     

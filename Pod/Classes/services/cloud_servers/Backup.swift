@@ -4,18 +4,18 @@ import ObjectMapper
 open class Backup: Mappable {
     
     /// Returns id.
-    open fileprivate(set) var id: String!
+    open fileprivate(set) var id: String?
     /// Returns name.
-    open fileprivate(set) var name: String!
+    open fileprivate(set) var name: String?
     /// Returns createdAt.
-    open fileprivate(set) var createdAt: Date!
+    open fileprivate(set) var createdAt: Date?
     /// TODO enum
-    open fileprivate(set) var type: String!
+    open fileprivate(set) var type: String?
     /// Returns setId.
-    open fileprivate(set) var setId: String!
+    open fileprivate(set) var setId: String?
     /// TODO enum
-    open fileprivate(set) var status: String!
-    
+    open fileprivate(set) var status: String?
+
     init() {
     }
     

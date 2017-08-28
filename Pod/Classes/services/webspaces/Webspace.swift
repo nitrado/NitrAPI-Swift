@@ -2,20 +2,20 @@ import ObjectMapper
 
 open class Webspace: Service {
     
-    open fileprivate(set) var name: String!
-    open fileprivate(set) var maxSpace: Int!
-    open fileprivate(set) var maxDomains: Int!
-    open fileprivate(set) var maxMailAccounts: Int!
-    open fileprivate(set) var maxFtpAccounts: Int!
-    open fileprivate(set) var maxDatabases: Int!
-    open fileprivate(set) var domains: [Domain]!
+    open fileprivate(set) var name: String?
+    open fileprivate(set) var maxSpace: Int?
+    open fileprivate(set) var maxDomains: Int?
+    open fileprivate(set) var maxMailAccounts: Int?
+    open fileprivate(set) var maxFtpAccounts: Int?
+    open fileprivate(set) var maxDatabases: Int?
+    open fileprivate(set) var domains: [Domain]?
     
     
     open class Domain: Mappable {
-        open fileprivate(set) var domain: String!
-        open fileprivate(set) var expires: String!
-        open fileprivate(set) var paidUntil: String!
-        open fileprivate(set) var status: String!
+        open fileprivate(set) var domain: String?
+        open fileprivate(set) var expires: String?
+        open fileprivate(set) var paidUntil: String?
+        open fileprivate(set) var status: String?
         
         public required init?(map: Map) {
         }

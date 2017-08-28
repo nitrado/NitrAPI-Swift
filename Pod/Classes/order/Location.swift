@@ -1,18 +1,18 @@
 import ObjectMapper
 
 open class Location: Mappable, CustomStringConvertible {
-    open fileprivate(set) var id: Int!
-    open fileprivate(set) var country: String!
-    open fileprivate(set) var city: String!
-    open fileprivate(set) var bouncer: Bool!
-    open fileprivate(set) var cloudServer: Bool!
-    open fileprivate(set) var cloudServerDynamic: Bool!
-    open fileprivate(set) var gameserver: Bool!
-    open fileprivate(set) var mumble: Bool!
-    open fileprivate(set) var musicbot: Bool!
-    open fileprivate(set) var teamspeak3: Bool!
-    open fileprivate(set) var ventrilo: Bool!
-    open fileprivate(set) var webspace: Bool!
+    open fileprivate(set) var id: Int?
+    open fileprivate(set) var country: String?
+    open fileprivate(set) var city: String?
+    open fileprivate(set) var bouncer: Bool?
+    open fileprivate(set) var cloudServer: Bool?
+    open fileprivate(set) var cloudServerDynamic: Bool?
+    open fileprivate(set) var gameserver: Bool?
+    open fileprivate(set) var mumble: Bool?
+    open fileprivate(set) var musicbot: Bool?
+    open fileprivate(set) var teamspeak3: Bool?
+    open fileprivate(set) var ventrilo: Bool?
+    open fileprivate(set) var webspace: Bool?
     
     // MARK: - Initialization
     
@@ -38,29 +38,29 @@ open class Location: Mappable, CustomStringConvertible {
     open func hasService(_ type: String) -> Bool {
         switch (type) {
             case "bouncer":
-                return bouncer
+                return bouncer ?? false
             case "cloud_server":
-                return cloudServer
+                return cloudServer ?? false
             case "cloud_server_dynamic":
-                return cloudServerDynamic
+                return cloudServerDynamic ?? false
             case "gameserver":
-                return gameserver
+                return gameserver ?? false
             case "mumble":
-                return mumble
+                return mumble ?? false
             case "musicbot":
-                return musicbot
+                return musicbot ?? false
             case "teamspeak3":
-                return teamspeak3
+                return teamspeak3 ?? false
             case "ventrilo":
-                return ventrilo
+                return ventrilo ?? false
             case "webspace":
-                return webspace
+                return webspace ?? false
             default:
                 return false
         }
     }
     
     open var description: String {
-        return "\(city as String) (\(country as String))"
+        return "\(city ?? "") (\(country ?? ""))"
     }
 }

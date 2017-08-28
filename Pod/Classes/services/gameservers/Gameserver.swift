@@ -48,42 +48,42 @@ open class Gameserver: Service {
     
     // MARK: - Attributes
 
-    open internal(set) var gameserverStatus: GameserverStatus!
+    open internal(set) var gameserverStatus: GameserverStatus?
     /// Token you need to connect to the websocket.
-    open fileprivate(set) var websocketToken: String!
+    open fileprivate(set) var websocketToken: String?
     /// Is this server in minecraft mode?
-    open fileprivate(set) var minecraftMode: Bool!
-    open fileprivate(set) var ip: String!
-    open fileprivate(set) var port: Int!
+    open fileprivate(set) var minecraftMode: Bool?
+    open fileprivate(set) var ip: String?
+    open fileprivate(set) var port: Int?
     /// Label of this gameserver.
     /// You need the label to connect to the websocket.
-    open fileprivate(set) var label: String!
-    open fileprivate(set) var gameserverType: GameserverType!
-    open fileprivate(set) var memory: MemoryType!
-    open fileprivate(set) var memoryTotal: Int!
+    open fileprivate(set) var label: String?
+    open fileprivate(set) var gameserverType: GameserverType?
+    open fileprivate(set) var memory: MemoryType?
+    open fileprivate(set) var memoryTotal: Int?
     open fileprivate(set) var game: String?
-    open fileprivate(set) var gameReadable: String!
-    open fileprivate(set) var modpacks: [String: Modpack]!
-    open fileprivate(set) var slots: Int!
-    open fileprivate(set) var location: String!
-    open fileprivate(set) var credentials: [String: Credentials]!
-    open fileprivate(set) var settings: [String: [String: String]]!
-    open fileprivate(set) var quota: Quota!
-    open fileprivate(set) var query: Query!
+    open fileprivate(set) var gameReadable: String?
+    open fileprivate(set) var modpacks: [String: Modpack]?
+    open fileprivate(set) var slots: Int?
+    open fileprivate(set) var location: String?
+    open fileprivate(set) var credentials: [String: Credentials]?
+    open fileprivate(set) var settings: [String: [String: String]]?
+    open fileprivate(set) var quota: Quota?
+    open fileprivate(set) var query: Query?
     
     // game specific
     open fileprivate(set) var path: String?
     open fileprivate(set) var pathAvailable: Bool?
-    open fileprivate(set) var hasBackups: Bool!
-    open fileprivate(set) var hasApplicationServer: Bool!
-    open fileprivate(set) var hasFileBrowser: Bool!
-    open fileprivate(set) var hasFtp: Bool!
-    open fileprivate(set) var hasExpertMode: Bool!
-    open fileprivate(set) var hasPluginSystem: Bool!
-    open fileprivate(set) var hasRestartMessageSupport: Bool!
-    open fileprivate(set) var hasDatabase: Bool!
-    open fileprivate(set) var logFiles: [String]!
-    open fileprivate(set) var configFiles: [String]!
+    open fileprivate(set) var hasBackups: Bool?
+    open fileprivate(set) var hasApplicationServer: Bool?
+    open fileprivate(set) var hasFileBrowser: Bool?
+    open fileprivate(set) var hasFtp: Bool?
+    open fileprivate(set) var hasExpertMode: Bool?
+    open fileprivate(set) var hasPluginSystem: Bool?
+    open fileprivate(set) var hasRestartMessageSupport: Bool?
+    open fileprivate(set) var hasDatabase: Bool?
+    open fileprivate(set) var logFiles: [String]?
+    open fileprivate(set) var configFiles: [String]?
     
 
     /// Inner class to fill the new infomation into the parent object
@@ -282,7 +282,7 @@ open class Gameserver: Service {
     }
     
     open func updateQuery(_ query: Query) {
-        self.query.update(query)
+        self.query?.update(query)
     }
     
     override func postInit(_ nitrapi: Nitrapi) throws {

@@ -12,10 +12,10 @@ open class FileServer {
 
     open class Token: Mappable {
         // MARK: - Attributes
-        open fileprivate(set) var url: String!
-        open fileprivate(set) var token: String!
+        open fileprivate(set) var url: String?
+        open fileprivate(set) var token: String?
         
-        open fileprivate(set) var id: Int!
+        open fileprivate(set) var id: Int?
         
         // MARK: - Initialization
         

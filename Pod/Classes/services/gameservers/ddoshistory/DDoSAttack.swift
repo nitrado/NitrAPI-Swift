@@ -4,18 +4,18 @@ open class DDoSAttack: Mappable {
     
     // MARK: - Attributes
     
-    open fileprivate(set) var id: Int!
-    open fileprivate(set) var startedAt: Date!
-    open fileprivate(set) var endedAt: Date!
-    open fileprivate(set) var attackType: String!
-    open fileprivate(set) var ip: String!
-    open fileprivate(set) var server: String!
+    open fileprivate(set) var id: Int?
+    open fileprivate(set) var startedAt: Date?
+    open fileprivate(set) var endedAt: Date?
+    open fileprivate(set) var attackType: String?
+    open fileprivate(set) var ip: String?
+    open fileprivate(set) var server: String?
     /// average packets-per-second
-    open fileprivate(set) var pps: Int!
+    open fileprivate(set) var pps: Int?
     /// average bandwidth
-    open fileprivate(set) var bandwidth: Int!
-    open fileprivate(set) var duration: Int!
-    open fileprivate(set) var data: [DDoSStat]!
+    open fileprivate(set) var bandwidth: Int?
+    open fileprivate(set) var duration: Int?
+    open fileprivate(set) var data: [DDoSStat]?
     
     // MARK: - Initialization
     

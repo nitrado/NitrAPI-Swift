@@ -2,9 +2,9 @@ import ObjectMapper
 
 open class Bouncer: Service {
     
-    open fileprivate(set) var maxBouncer: Int!
+    open fileprivate(set) var maxBouncer: Int?
     
-    open fileprivate(set) var bouncers: [BouncerInstance]!
+    open fileprivate(set) var bouncers: [BouncerInstance]?
     
     
     class BouncerInfo: Mappable {
@@ -24,11 +24,11 @@ open class Bouncer: Service {
     }
     
     open class BouncerInstance: Mappable {
-        open fileprivate(set) var ident: String!
-        open fileprivate(set) var password: String!
-        open fileprivate(set) var comment: String!
-        open fileprivate(set) var serverName: String!
-        open fileprivate(set) var serverPort: Int!
+        open fileprivate(set) var ident: String?
+        open fileprivate(set) var password: String?
+        open fileprivate(set) var comment: String?
+        open fileprivate(set) var serverName: String?
+        open fileprivate(set) var serverPort: Int?
         
         public required init?(map: Map) {
             
@@ -55,7 +55,7 @@ open class Bouncer: Service {
     override func postInit(_ nitrapi: Nitrapi) throws {
         try super.postInit(nitrapi)
         
-        if (status == .ACTIVE) {
+        if (status == Status.ACTIVE) {
             try refresh()
         }
     }

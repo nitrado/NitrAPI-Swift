@@ -3,9 +3,9 @@ import ObjectMapper
 open class GlobalGameList: Mappable {
     
     open class Location: Mappable {
-        open fileprivate(set) var id: Int!
-        open fileprivate(set) var country: String!
-        open fileprivate(set) var city: String!
+        open fileprivate(set) var id: Int?
+        open fileprivate(set) var country: String?
+        open fileprivate(set) var city: String?
         public required init?(map: Map) {
             
         }
@@ -23,7 +23,7 @@ open class GlobalGameList: Mappable {
     open fileprivate(set) var locations: [Location]?
 
     /// List of all games.
-    open fileprivate(set) var games: [Game]!
+    open fileprivate(set) var games: [Game]?
     
     // MARK: - Initialization
     

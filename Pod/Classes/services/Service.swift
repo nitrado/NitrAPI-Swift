@@ -14,19 +14,19 @@ open class Service: Mappable {
         case WEBSPACE = "webspace"
     }
     
-    public enum Status: String {
+    public class Status: Value {
         /// The service is active and useable
-        case ACTIVE = "active"
+        public static let ACTIVE = Status("active")
         /// The service is currently installing
-        case INSTALLING = "installing"
+        public static let INSTALLING = Status("installing")
         /// The service is suspended and can be reactivated
-        case SUSPENDED = "suspended"
+        public static let SUSPENDED = Status("suspended")
         /// The service is admin locked, please contact support
-        case ADMINLOCKED = "adminlocked"
+        public static let ADMINLOCKED = Status("adminlocked")
         /// The service is admin locked and suspended
-        case ADMINLOCKED_SUSPENDED = "adminlocked_suspended"
+        public static let ADMINLOCKED_SUSPENDED = Status("adminlocked_suspended")
         /// The service is deleted
-        case DELETED = "deleted"
+        public static let DELETED = Status("deleted")
     }
     
     // MARK: - Attributes
@@ -35,12 +35,12 @@ open class Service: Mappable {
     open fileprivate(set) var startDate: Date?
     open fileprivate(set) var suspendDate: Date?
     open fileprivate(set) var deleteDate: Date?
-    open fileprivate(set) var userId: Int!
-    open fileprivate(set) var type: ServiceType!
-    open fileprivate(set) var username: String!
+    open fileprivate(set) var userId: Int?
+    open fileprivate(set) var type: ServiceType?
+    open fileprivate(set) var username: String?
     open fileprivate(set) var comment: String?
-    open fileprivate(set) var autoExtension: Bool!
-    open fileprivate(set) var typeHuman: String!
+    open fileprivate(set) var autoExtension: Bool?
+    open fileprivate(set) var typeHuman: String?
     open fileprivate(set) var details: ServiceDetails?
     open fileprivate(set) var roles: [Role]?
     open fileprivate(set) var status: Status?
@@ -64,7 +64,7 @@ open class Service: Mappable {
         typeHuman                   <-  map["type_human"]
         details                     <-  map["details"]
         roles                       <- (map["roles"], EnumTransform<Role>())
-        status                      <- (map["status"], EnumTransform<Status>())
+        status                      <- (map["status"], ValueTransform<Status>())
         
     }
     

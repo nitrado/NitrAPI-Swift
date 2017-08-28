@@ -21,13 +21,13 @@ open class PluginSystemInfo: Mappable {
     
     // MARK: - Attributes
     
-    open fileprivate(set) var status: Status!
-    open fileprivate(set) var hostname: String!
-    open fileprivate(set) var ip: String!
-    open fileprivate(set) var port: Int!
-    open fileprivate(set) var installedAt: Date!
-    open fileprivate(set) var password: String!
-    open fileprivate(set) var database: Credentials!
+    open fileprivate(set) var status: Status?
+    open fileprivate(set) var hostname: String?
+    open fileprivate(set) var ip: String?
+    open fileprivate(set) var port: Int?
+    open fileprivate(set) var installedAt: Date?
+    open fileprivate(set) var password: String?
+    open fileprivate(set) var database: Credentials?
     
     // MARK: - Initialization
     

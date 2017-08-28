@@ -11,17 +11,17 @@ open class FileEntry: Mappable {
     
     // MARK: - Attributes
     
-    open fileprivate(set) var type: FileType!
-    open fileprivate(set) var path: String!
-    open fileprivate(set) var name: String!
-    open fileprivate(set) var size: Int!
-    open fileprivate(set) var owner: String!
-    open fileprivate(set) var group: String!
+    open fileprivate(set) var type: FileType?
+    open fileprivate(set) var path: String?
+    open fileprivate(set) var name: String?
+    open fileprivate(set) var size: Int?
+    open fileprivate(set) var owner: String?
+    open fileprivate(set) var group: String?
     /// Access rights of this file in chmod notation.
-    open fileprivate(set) var chmod: String!
-    open fileprivate(set) var createdAt: Int! // TODO: change these to date someday?
-    open fileprivate(set) var modifiedAt: Int!
-    open fileprivate(set) var accessedAt: Int!
+    open fileprivate(set) var chmod: String?
+    open fileprivate(set) var createdAt: Int? // TODO: change these to date someday?
+    open fileprivate(set) var modifiedAt: Int?
+    open fileprivate(set) var accessedAt: Int?
     
     // MARK: - Initialization
     

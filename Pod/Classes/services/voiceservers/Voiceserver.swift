@@ -9,10 +9,10 @@ open class Voiceserver: Service {
     }
     
     open fileprivate(set) var voiceserverType: VoiceserverType?
-    open fileprivate(set) var ip: String!
-    open fileprivate(set) var port: Int!
-    open fileprivate(set) var slots: Int!
-    open fileprivate(set) var started: Bool!
+    open fileprivate(set) var ip: String?
+    open fileprivate(set) var port: Int?
+    open fileprivate(set) var slots: Int?
+    open fileprivate(set) var started: Bool?
     open fileprivate(set) var specific: AnyObject? // TODO: elaborate
     
     

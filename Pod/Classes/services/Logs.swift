@@ -7,12 +7,12 @@ open class Logs: Mappable {
         
         // MARK: - Attributes
         
-        open fileprivate(set) var user: String!
-        open fileprivate(set) var category: String!
-        open fileprivate(set) var message: String!
-        open fileprivate(set) var createdAt: Date!
-        open fileprivate(set) var ip: String!
-        open fileprivate(set) var admin: Bool!
+        open fileprivate(set) var user: String?
+        open fileprivate(set) var category: String?
+        open fileprivate(set) var message: String?
+        open fileprivate(set) var createdAt: Date?
+        open fileprivate(set) var ip: String?
+        open fileprivate(set) var admin: Bool?
         
         // MARK: - Initialization
         public required init?(map: Map) {
@@ -36,11 +36,11 @@ open class Logs: Mappable {
     
     // MARK: - Attributes
     
-    open fileprivate(set) var currentPage: Int!
-    open fileprivate(set) var logsPerPage: Int!
-    open fileprivate(set) var pageCount: Int!
-    open fileprivate(set) var logCount: Int!
-    open fileprivate(set) var logs: [LogEntry]!
+    open fileprivate(set) var currentPage: Int?
+    open fileprivate(set) var logsPerPage: Int?
+    open fileprivate(set) var pageCount: Int?
+    open fileprivate(set) var logCount: Int?
+    open fileprivate(set) var logs: [LogEntry]?
     
     // MARK: - Initialization
     

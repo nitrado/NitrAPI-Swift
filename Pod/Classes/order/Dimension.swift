@@ -1,7 +1,7 @@
 import ObjectMapper
 
 open class Dimension: Mappable {
-    open fileprivate(set) var id: String!
+    open fileprivate(set) var id: String?
     open fileprivate(set) var name: String?
     open fileprivate(set) var values: [String: DimensionValue]?
     

@@ -12,10 +12,10 @@ open class BungeeCord: Mappable {
     }
     
     // MARK: - Attributes
-    open fileprivate(set) var enabled: Bool!
-    open fileprivate(set) var only: Bool!
-    open fileprivate(set) var firewall: FirewallStatus!
-    open fileprivate(set) var firewallIp: String!
+    open fileprivate(set) var enabled: Bool?
+    open fileprivate(set) var only: Bool?
+    open fileprivate(set) var firewall: FirewallStatus?
+    open fileprivate(set) var firewallIp: String?
     
     // MARK: - Initialization
     public required init?(map: Map) {

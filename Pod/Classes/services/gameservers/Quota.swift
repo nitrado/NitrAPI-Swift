@@ -6,18 +6,18 @@ open class Quota: Mappable {
     // MARK: - Attributes
     
     /// Number of used blocks.
-    open fileprivate(set) var blockUsage: Int!
+    open fileprivate(set) var blockUsage: Int?
     /// Soft limit of blocks.
-    open fileprivate(set) var blockSoftLimit: Int!
+    open fileprivate(set) var blockSoftLimit: Int?
     /// Hard limit of blocks.
-    open fileprivate(set) var blockHardLimit: Int!
+    open fileprivate(set) var blockHardLimit: Int?
     
     /// Number of used files.
-    open fileprivate(set) var fileUsage: Int!
+    open fileprivate(set) var fileUsage: Int?
     /// Soft limit of files.
-    open fileprivate(set) var fileSoftLimit: Int!
+    open fileprivate(set) var fileSoftLimit: Int?
     /// Hard limit of files.
-    open fileprivate(set) var fileHardLimit: Int!
+    open fileprivate(set) var fileHardLimit: Int?
     
     // MARK: - Initialization
     

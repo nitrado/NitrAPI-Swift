@@ -3,10 +3,10 @@ import ObjectMapper
 open class World: Mappable {
     
     // MARK: - Attributes
-    open fileprivate(set) var game: String!
-    open fileprivate(set) var world: String!
-    open fileprivate(set) var timestamp: Int!
-    open fileprivate(set) var size: Int!
+    open fileprivate(set) var game: String?
+    open fileprivate(set) var world: String?
+    open fileprivate(set) var timestamp: Int?
+    open fileprivate(set) var size: Int?
     
     // MARK: - Initialization
     public required init?(map: Map) {

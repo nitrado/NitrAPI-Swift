@@ -12,23 +12,23 @@ open class Task: Mappable {
     }
     
     // MARK: - Attributes
-    open fileprivate(set) var id: Int!
-    open fileprivate(set) var serviceId: Int!
+    open fileprivate(set) var id: Int?
+    open fileprivate(set) var serviceId: Int?
     /// Minutes in cron format.
-    open fileprivate(set) var minute: String!
+    open fileprivate(set) var minute: String?
     /// Hours in cron format.
-    open fileprivate(set) var hour: String!
+    open fileprivate(set) var hour: String?
     /// Days in cron format.
-    open fileprivate(set) var day: String!
+    open fileprivate(set) var day: String?
     /// Months in cron format.
-    open fileprivate(set) var month: String!
+    open fileprivate(set) var month: String?
     /// Weekdays in cron format.
-    open fileprivate(set) var weekday: String!
-    open fileprivate(set) var nextRun: Date!
-    open fileprivate(set) var lastRun: Date!
-    open fileprivate(set) var actionMethod: ActionType!
+    open fileprivate(set) var weekday: String?
+    open fileprivate(set) var nextRun: Date?
+    open fileprivate(set) var lastRun: Date?
+    open fileprivate(set) var actionMethod: ActionType?
     /// Optional message displayed on restart or stop tasks.
-    open fileprivate(set) var actionData: String!
+    open fileprivate(set) var actionData: String?
     
     // MARK: - Initialization
     

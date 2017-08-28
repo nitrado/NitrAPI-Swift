@@ -4,7 +4,7 @@ open class Modpack: Mappable {
     
     // MARK: - Attributes
     
-    open fileprivate(set) var name: String!
+    open fileprivate(set) var name: String?
     open fileprivate(set) var modpackVersion: String?
     open fileprivate(set) var gameVersion: String?
     open fileprivate(set) var modpackFile: String?

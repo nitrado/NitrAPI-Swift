@@ -4,10 +4,10 @@ open class DDoSStat: Mappable {
     
     // MARK: - Attributes
     
-    open fileprivate(set) var datetime: Date!
+    open fileprivate(set) var datetime: Date?
     /// packets-per-second
-    open fileprivate(set) var pps: Int!
-    open fileprivate(set) var bandwidth: Int!
+    open fileprivate(set) var pps: Int?
+    open fileprivate(set) var bandwidth: Int?
     
     // MARK: - Initialization
     

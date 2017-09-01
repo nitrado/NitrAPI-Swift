@@ -1,6 +1,6 @@
 import ObjectMapper
 
-public class Value : Equatable {
+public class Value : Equatable, Hashable {
     public /// Returns a Boolean value indicating whether two values are equal.
     ///
     /// Equality is the inverse of inequality. For any values `a` and `b`,
@@ -17,6 +17,10 @@ public class Value : Equatable {
     required public init(_ value: String) {
         var value = value
         self.value = value
+    }
+    
+    public var hashValue: Int {
+        return value.hashValue
     }
 }
 

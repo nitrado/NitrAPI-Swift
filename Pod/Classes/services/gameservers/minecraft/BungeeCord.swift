@@ -2,13 +2,13 @@ import ObjectMapper
 
 open class BungeeCord: Mappable {
     
-    public enum FirewallStatus: String {
+    public class FirewallStatus: Value {
         /// Firewall is deactivated.
-        case OFF = "off"
+        public static let OFF = FirewallStatus("off")
         /// Firewall only allows its ip address.
-        case ON_SELF = "on_self"
+        public static let ON_SELF = FirewallStatus("on_self")
         /// Firewall only allows the ip address in firewallIp
-        case ON_IP = "on_ip"
+        public static let ON_IP = FirewallStatus("on_ip")
     }
     
     // MARK: - Attributes
@@ -25,7 +25,7 @@ open class BungeeCord: Mappable {
     open func mapping(map: Map) {
         enabled     <- map["enabled"]
         only        <- map["only"]
-        firewall    <- (map["firewall"], EnumTransform<FirewallStatus>())
+        firewall    <- (map["firewall"], ValueTransform<FirewallStatus>())
         firewallIp  <- map["firewall_ip"]
     }
     

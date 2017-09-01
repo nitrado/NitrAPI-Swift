@@ -2,13 +2,13 @@ import ObjectMapper
 
 open class Task: Mappable {
     
-    public enum ActionType: String {
+    public class ActionType: Value {
         /// Restarts the gameserver.
-        case RESTART = "restart"
+        public static let RESTART = ActionType("restart")
         /// Stops the gameserver.
-        case STOP = "stop"
+        public static let STOP = ActionType("stop")
         /// Starts the gameserver.
-        case START = "start"
+        public static let START = ActionType("start")
     }
     
     // MARK: - Attributes
@@ -46,7 +46,7 @@ open class Task: Mappable {
         weekday         <- map["weekday"]
         nextRun         <- (map["next_run"], Nitrapi.dft)
         lastRun         <- (map["last_run"], Nitrapi.dft)
-        actionMethod    <- (map["action_method"], EnumTransform<ActionType>())
+        actionMethod    <- (map["action_method"], ValueTransform<ActionType>())
         actionData      <- map["action_data"]
     }
     

@@ -15,9 +15,9 @@ open class AccountOverview: Mappable {
         payments <- map["payments"]
     }
     
-    public enum IncOrDec: String {
-        case INCREASE = "increase"
-        case DECREASE = "decrease"
+    public class IncOrDec: Value {
+        public static let INCREASE = IncOrDec("increase")
+        public static let DECREASE = IncOrDec("decrease")
     }
     
     open class Payment: Mappable {
@@ -47,7 +47,7 @@ open class AccountOverview: Mappable {
             method              <- map["method"]
             duration            <- map["duration"]
             amount              <- map["amount"]
-            type                <- (map["type"], EnumTransform<IncOrDec>())
+            type                <- (map["type"], ValueTransform<IncOrDec>())
             currency            <- map["currency"]
             ip                  <- map["ip"]
             refundable          <- map["refundable"]

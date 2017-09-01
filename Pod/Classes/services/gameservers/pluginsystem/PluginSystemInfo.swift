@@ -2,21 +2,21 @@ import ObjectMapper
 
 open class PluginSystemInfo: Mappable {
     
-    public enum Status: String {
+    public class Status: Value {
         /// Plugin system is stopping.
-        case STOPPING = "do_stop"
+        public static let STOPPING = Status("do_stop")
         /// Plugin system is restarting.
-        case RESTARTING = "do_restart"
+        public static let RESTARTING = Status("do_restart")
         /// Plugin system is installing.
-        case INSTALLING = "do_install"
+        public static let INSTALLING = Status("do_install")
         /// Plugin system is uninstalling.
-        case UNINSTALLING = "do_uninstall"
+        public static let UNINSTALLING = Status("do_uninstall")
         /// Plugin system is started.
-        case STARTED = "started"
+        public static let STARTED = Status("started")
         /// Plugin system is stopped.
-        case STOPPED = "stopped"
+        public static let STOPPED = Status("stopped")
         /// Plugin system has an error.
-        case ERROR = "error"
+        public static let ERROR = Status("error")
     }
     
     // MARK: - Attributes
@@ -36,7 +36,7 @@ open class PluginSystemInfo: Mappable {
     }
     
     open func mapping(map: Map) {
-        status      <- (map["status"], EnumTransform<Status>())
+        status      <- (map["status"], ValueTransform<Status>())
         hostname    <- map["hostname"]
         ip          <- map["ip"]
         port        <- map["port"]

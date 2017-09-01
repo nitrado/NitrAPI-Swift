@@ -4,27 +4,27 @@ import ObjectMapper
 open class CloudServer: Service {
     
     /// This enum represents the status of a CloudServer.
-    public enum CloudserverStatus: String {
+    public class CloudserverStatus: Value {
         /// The Server is running.
-        case RUNNING = "running"
+        public static let RUNNING = CloudserverStatus("running")
         /// The Server is stopped.
-        case STOPPED = "stopped"
+        public static let STOPPED = CloudserverStatus("stopped")
         /// The Server is currently installing. This can take some minutes.
-        case INSTALLING = "installing"
+        public static let INSTALLING = CloudserverStatus("installing")
         /// The Server is currently re-installing. This can take some minutes.
-        case REINSTALLING = "reinstalling"
+        public static let REINSTALLING = CloudserverStatus("reinstalling")
         /// The Server is currently processing an up- or downgrade.
-        case FLAVOUR_CHANGE = "flavour_change"
+        public static let FLAVOUR_CHANGE = CloudserverStatus("flavour_change")
         /// The Server is currently restoring a backup. This can take some minutes.
-        case RESTORING = "restoring"
+        public static let RESTORING = CloudserverStatus("restoring")
         /// An error occurred while up- or downgrading. The support has been informed.
-        case ERROR_FC = "error_fc"
+        public static let ERROR_FC = CloudserverStatus("error_fc")
         /// An error occurred while deleting the Server. The support has been informed.
-        case ERROR_DELETE = "error_delete"
+        public static let ERROR_DELETE = CloudserverStatus("error_delete")
         /// An error occurred while installing the Server. The support has been informed.
-        case ERROR_INSTALL = "error_install"
+        public static let ERROR_INSTALL = CloudserverStatus("error_install")
         /// An error occurred while reinstalling the Server. The support has been informed.
-        case ERROR_REINSTALL = "error_reinstall"
+        public static let ERROR_REINSTALL = CloudserverStatus("error_reinstall")
     }
     
     /// Returns the status of the CloudServer.
@@ -55,7 +55,7 @@ open class CloudServer: Service {
         }
         
         func mapping(map: Map) {
-            parent.cloudserverStatus <- (map["status"], EnumTransform<CloudserverStatus>())
+            parent.cloudserverStatus <- (map["status"], ValueTransform<CloudserverStatus>())
             parent.hostname <- map["hostname"]
             parent.dynamic <- map["dynamic"]
             parent.hardware <- map["hardware"]

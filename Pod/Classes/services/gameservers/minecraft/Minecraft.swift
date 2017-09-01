@@ -44,7 +44,7 @@ open class Minecraft: Mappable {
         _ = try nitrapi.client.dataPost("services/\(id as Int)/gameservers/games/minecraft/bungeecord", parameters: [
             "enabled": (enabled ? "1":"0"),
             "only": (only ?"1":"0"),
-            "firewall": firewall.rawValue,
+            "firewall": firewall.value,
             "firewall_ip": firewallIp
             ])
     }

@@ -2,11 +2,11 @@ import ObjectMapper
 
 open class FileEntry: Mappable {
     
-    public enum FileType: String {
+    public class FileType: Value {
         /// This entry is a file.
-        case FILE = "file"
+        public static let FILE = FileType("file")
         /// This entry is a directory.
-        case DIR = "dir"
+        public static let DIR = FileType("dir")
     }
     
     // MARK: - Attributes
@@ -36,7 +36,7 @@ open class FileEntry: Mappable {
     }
     
     open func mapping(map: Map) {
-        type        <- (map["type"], EnumTransform<FileType>())
+        type        <- (map["type"], ValueTransform<FileType>())
         path        <- map["path"]
         name        <- map["name"]
         size        <- map["size"]

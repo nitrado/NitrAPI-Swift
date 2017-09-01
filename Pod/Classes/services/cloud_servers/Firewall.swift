@@ -5,36 +5,29 @@ open class Firewall: Mappable {
     fileprivate var nitrapi: Nitrapi!
     fileprivate var id: Int!
     
-    public enum FirewallProtocol: String, CustomStringConvertible {
-        case TCP = "tcp"
-        case UDP = "udp"
-        case ICMP = "icmp"
-        case ANY = "any"
+    public class FirewallProtocol: Value, CustomStringConvertible {
+        public static let TCP = FirewallProtocol("tcp")
+        public static let UDP = FirewallProtocol("udp")
+        public static let ICMP = FirewallProtocol("icmp")
+        public static let ANY = FirewallProtocol("any")
         
         public var description: String {
-            switch self {
-            case .TCP:
+            switch value {
+            case "tcp":
                 return "TCP"
-            case .UDP:
+            case "udp":
                 return "UDP"
-            case .ICMP:
+            case "udp":
                 return "ICMP"
-            case .ANY:
+            case "any":
                 return "ANY"
+            default:
+                return "???"
             }
         }
         
         public var internDesc: String {
-            switch self {
-            case .TCP:
-                return "tcp"
-            case .UDP:
-                return "udp"
-            case .ICMP:
-                return "icmp"
-            case .ANY:
-                return "any"
-            }
+            return value
         }
     }
     
@@ -78,7 +71,7 @@ open class Firewall: Mappable {
         public func mapping(map: Map) {
             targetPort <- map["target_port"]
             targetIp <- map["target_ip"]
-            firewallProtocol <- (map["protocol"], EnumTransform<FirewallProtocol>())
+            firewallProtocol <- (map["protocol"], ValueTransform<FirewallProtocol>())
             number <- map["number"]
             comment <- map["comment"]
             sourceIp <- map["source_ip"]

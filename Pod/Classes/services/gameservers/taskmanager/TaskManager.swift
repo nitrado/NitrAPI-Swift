@@ -35,7 +35,7 @@ open class TaskManager {
             "day":              day,
             "month":            month,
             "weekday":          weekday,
-            "action_method":    method.rawValue,
+            "action_method":    method.value,
             "action_data":      message
             ])
     }
@@ -56,7 +56,7 @@ open class TaskManager {
             "day":              day,
             "month":            month,
             "weekday":          weekday,
-            "action_method":    method.rawValue,
+            "action_method":    method.value,
             "action_data":      message
             ])
     }

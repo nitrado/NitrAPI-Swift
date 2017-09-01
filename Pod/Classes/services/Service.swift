@@ -3,15 +3,15 @@ import ObjectMapper
 open class Service: Mappable {
     internal var nitrapi: Nitrapi!
     
-    public enum ServiceType: String {
-        case BOUNCER = "bouncer"
-        case CLANPAGE = "clanpage"
-        case CLOUDSERVER = "cloud_server"
-        case GAMESERVER = "gameserver"
-        case ROOTSERVER = "rootserver"
-        case STORAGE = "storage"
-        case VOICESERVER = "voiceserver"
-        case WEBSPACE = "webspace"
+    public class ServiceType: Value {
+        public static let BOUNCER = ServiceType("bouncer")
+        public static let CLANPAGE = ServiceType("clanpage")
+        public static let CLOUDSERVER = ServiceType("cloud_server")
+        public static let GAMESERVER = ServiceType("gameserver")
+        public static let ROOTSERVER = ServiceType("rootserver")
+        public static let STORAGE = ServiceType("storage")
+        public static let VOICESERVER = ServiceType("voiceserver")
+        public static let WEBSPACE = ServiceType("webspace")
     }
     
     public class Status: Value {
@@ -63,13 +63,13 @@ open class Service: Mappable {
         suspendDate                 <- (map["suspend_date"], Nitrapi.dft)
         deleteDate                  <- (map["delete_date"],  Nitrapi.dft)
         userId                      <-  map["user_id"]
-        type                        <-  map["type"] // TODO: enum transform?
+        type                        <- (map["type"], ValueTransform<ServiceType>())
         username                    <-  map["username"]
         comment                     <-  map["comment"]
         autoExtension               <-  map["auto_extension"]
         typeHuman                   <-  map["type_human"]
         details                     <-  map["details"]
-        roles                       <- (map["roles"], EnumTransform<Role>())
+        roles                       <- (map["roles"], ValueTransform<Role>())
         status                      <- (map["status"], ValueTransform<Status>())
         
     }

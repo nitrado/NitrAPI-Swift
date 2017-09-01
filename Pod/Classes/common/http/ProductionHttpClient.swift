@@ -28,15 +28,14 @@ open class ProductionHttpClient {
         params["access_token"] = accessToken
         if let lc = locale { params["locale"] = lc }
         let res = Just.get(nitrapiUrl + url, params: params)
-        
-       return try parseResult(res)
+        return try parseResult(res)
     }
     
     /// send a POST request
     open func dataPost(_ url: String,parameters: Dictionary<String, String>) throws -> NSDictionary? {
         let res = Just.post(nitrapiUrl + url, params: ["access_token": accessToken, "locale": locale ?? "en"], data: parameters)
 
-       return try parseResult(res)
+        return try parseResult(res)
     }
     
     /// send a PUT request
@@ -56,14 +55,14 @@ open class ProductionHttpClient {
     
     func parseResult(_ res: HTTPResult) throws -> NSDictionary? {
         // get rate limit
-        if (res.headers["X-RateLimit-Limit"] != nil) {
+        if res.headers["X-RateLimit-Limit"] != nil {
             rateLimit = Int(res.headers["X-RateLimit-Limit"]!)!
             rateLimitRemaining = Int(res.headers["X-RateLimit-Remaining"]!)!
             rateLimitReset = Int(res.headers["X-RateLimit-Reset"]!)!
         }
         
         var errorId: String? = nil
-        if (res.headers["X-Raven-Event-ID"] != nil) {
+        if res.headers["X-Raven-Event-ID"] != nil {
             errorId = res.headers["X-Raven-Event-ID"]
         }
         

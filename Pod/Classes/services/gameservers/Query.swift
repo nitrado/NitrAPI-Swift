@@ -5,7 +5,7 @@ open class Query: Mappable {
     
     /// A Player on a gameserver.
     open class Player: Mappable {
-        open fileprivate(set) var id: Int?
+        open fileprivate(set) var id: String?
         open fileprivate(set) var name: String?
         /// Is this player a bot?
         open fileprivate(set) var bot: Bool?

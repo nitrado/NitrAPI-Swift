@@ -21,6 +21,8 @@ open class Game: Mappable, CustomStringConvertible {
     open fileprivate(set) var iconx128: String?
     open fileprivate(set) var iconx256: String?
     open fileprivate(set) var locations: [Int]?
+    open fileprivate(set) var tags: [String]?
+    open fileprivate(set) var preorderLocations: [Int]?
     open fileprivate(set) var visible: Bool?
     
     // MARK: - Initialization
@@ -48,6 +50,8 @@ open class Game: Mappable, CustomStringConvertible {
         iconx128        	<- map["icons.x120"]
         iconx256            <- map["icons.x256"]
         locations           <- map["locations"]
+        tags                <- map["tags"]
+        preorderLocations   <- map["preorder_locations"]
         visible             <- map["visible"]
     }
     

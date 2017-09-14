@@ -27,6 +27,8 @@ open class Service: Mappable {
         public static let ADMINLOCKED_SUSPENDED = Status("adminlocked_suspended")
         /// The service is deleted
         public static let DELETED = Status("deleted")
+        /// The service is preordered
+        public static let PREORDERED = Status("preordered")
         
         // These statuses are set by fixServiceStatus() if suspendDate or deleteDate are in the past.
         /// The service is currently being suspended.

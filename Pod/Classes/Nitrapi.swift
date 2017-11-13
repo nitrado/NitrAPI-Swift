@@ -33,8 +33,6 @@ open class Nitrapi {
 
     /// Creates a new Nitrapi with the given access token and url.
     public init(accessToken: String, nitrapiUrl: String) {
-        
-        print("Access Token: \(accessToken)")
         self.accessToken = accessToken
         self.nitrapiUrl = nitrapiUrl
         self.client = ProductionHttpClient(nitrapiUrl: nitrapiUrl, accessToken: accessToken)

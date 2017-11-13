@@ -1,7 +1,7 @@
 import ObjectMapper
 
 open class Location: Mappable, CustomStringConvertible {
-    open fileprivate(set) var id: Int?
+    open fileprivate(set) var id: Int!
     open fileprivate(set) var country: String?
     open fileprivate(set) var city: String?
     open fileprivate(set) var bouncer: Bool?

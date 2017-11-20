@@ -10,6 +10,7 @@ open class ProductionHttpClient {
     open fileprivate(set) var rateLimitRemaining: Int = 0
     open fileprivate(set) var rateLimitReset: Int = 0
     
+    open var additionalHeaders: [String:String] = [:]
     
     public init (nitrapiUrl: String, accessToken: String) {
         self.nitrapiUrl = nitrapiUrl
@@ -27,27 +28,27 @@ open class ProductionHttpClient {
         var params = parameters
         params["access_token"] = accessToken
         if let lc = locale { params["locale"] = lc }
-        let res = Just.get(nitrapiUrl + url, params: params)
+        let res = Just.get(nitrapiUrl + url, params: params, headers: additionalHeaders)
         return try parseResult(res)
     }
     
     /// send a POST request
     open func dataPost(_ url: String,parameters: Dictionary<String, String>) throws -> NSDictionary? {
-        let res = Just.post(nitrapiUrl + url, params: ["access_token": accessToken, "locale": locale ?? "en"], data: parameters)
+        let res = Just.post(nitrapiUrl + url, params: ["access_token": accessToken, "locale": locale ?? "en"], data: parameters, headers: additionalHeaders)
 
         return try parseResult(res)
     }
     
     /// send a PUT request
     open func dataPut(_ url: String,parameters: Dictionary<String, String>) throws -> NSDictionary? {
-        let res = Just.put(nitrapiUrl + url, params: ["access_token": accessToken, "locale": locale ?? "en"], data: parameters)
+        let res = Just.put(nitrapiUrl + url, params: ["access_token": accessToken, "locale": locale ?? "en"], data: parameters, headers: additionalHeaders)
         
         return try parseResult(res)
     }
     
     /// send a DELETE request
     open func dataDelete(_ url: String, parameters: Dictionary<String, String>) throws -> NSDictionary? {
-        let res = Just.delete(nitrapiUrl + url, params: ["access_token": accessToken, "locale": locale ?? "en"], data: parameters)
+        let res = Just.delete(nitrapiUrl + url, params: ["access_token": accessToken, "locale": locale ?? "en"], data: parameters, headers: additionalHeaders)
         
        return try parseResult(res)
     }

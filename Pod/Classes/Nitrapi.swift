@@ -22,7 +22,7 @@ open class Nitrapi {
     fileprivate var nitrapiUrl: String
     open fileprivate(set) var accessToken: String
     
-    open fileprivate(set) var client: ProductionHttpClient
+    open var client: ProductionHttpClient
     
     // MARK: - Initialization
     

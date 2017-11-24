@@ -24,6 +24,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Pod/Classes/**/*'
 
-  s.dependency 'ObjectMapper', '~>2.0'
+  s.dependency 'ObjectMapper', '~>3.0'
   s.dependency 'Just'
 end

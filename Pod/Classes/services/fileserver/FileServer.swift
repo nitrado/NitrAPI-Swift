@@ -112,7 +112,7 @@ open class FileServer {
     
     open func copyFile(_ sourceFile: String, targetDir: String, fileName: String, username: String? = nil) throws {
         if !sameDirectory(sourceFile, dir: targetDir) {
-            var params = ["source_path": sourceFile, "target_path": targetDir, "target_filename": fileName]
+            var params = ["source_path": sourceFile, "target_path": targetDir, "target_name": fileName]
             if let username = username {
                 params["username"] = username
             }
